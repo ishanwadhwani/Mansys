@@ -214,6 +214,8 @@ export default function CandidateForm() {
     tooltipContent?: React.ReactNode;
   };
 
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+
   const SelectionGroup = <Name extends keyof FormValues>({
     label,
     name,
@@ -230,9 +232,15 @@ export default function CandidateForm() {
 
         {/* Tooltip Icon & Popup (Only renders if content is provided) */}
         {tooltipContent && (
-          <div className="relative group">
-            {/* Icon */}
-            <div className="cursor-help text-[var(--muted)]/70 hover:text-[var(--color-brand)] transition-colors duration-200">
+          <div className="relative">
+            <div
+              className="cursor-help text-[var(--color-secondary)] hover:text-[var(--color-brand)] transition-colors duration-200 p-1"
+              onMouseEnter={() => setIsTooltipOpen(true)}
+              onMouseLeave={() => setIsTooltipOpen(false)}
+              onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+            >
+              {/* Icon */}
+              {/* <div className="cursor-help text-[var(--muted)]/70 hover:text-[var(--color-brand)] transition-colors duration-200"> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -248,7 +256,15 @@ export default function CandidateForm() {
             </div>
 
             {/* Popup Box */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-4 bg-[var(--color-navy)] text-[var(--color-paper)] text-xs rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50 w-max max-w-[280px] md:max-w-sm pointer-events-none">
+            <div
+              className={`
+                  absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 p-4 
+                  bg-[var(--color-navy)] text-[var(--color-paper)] text-xs rounded-xl shadow-2xl 
+                  transition-all duration-300 transform 
+                  w-max max-w-[260px] md:max-w-sm pointer-events-none
+                  ${isTooltipOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"}
+                `}
+            >
               {tooltipContent}
               <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[var(--color-navy)]"></div>
             </div>

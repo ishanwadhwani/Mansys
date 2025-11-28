@@ -1,81 +1,98 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import logo from "../../../public/logo.png";
+// Ensure this path is correct relative to components/Header.tsx
+// If components is at root, and public is at root, this should be "../public/logo.png"
+// However, standard Next.js allows importing from public if configured, but let's assume relative path.
+// Better yet, for public assets, we can often just use the string path "/logo.png" with Image src if we know dimensions,
+// but importing gives us sizing. I will stick to the user's pattern but correct the depth if needed.
+// User had "../../../public/logo.png" which implies components/Header.tsx is deep? 
+// No, user likely moved files. If Header.tsx is in `components/`, and `public/` is root, it is `../public/logo.png`.
+import logo from "../../../public/logo.png"; 
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [open]);
+
   return (
-    <header className="fixed top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-neutral-100">
-      <div className="container flex items-center justify-between gap-4 py-4">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-md flex items-center justify-center">
-              <Image src={logo} alt="logo" />
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-secondary)]/20">
+        <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+          
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center gap-3 z-50 relative">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+              <Image src={logo} alt="MANSYS Logo" className="rounded-lg "/>
             </div>
-            <div className="">
-              <div className="text-lg font-semibold text-brand-700">MANSYS</div>
-              <div className="text-xs text-neutral-400 -mt-0.5">
-                Employer-Sponsored Pathways
-              </div>
+            <div>
+              <div className="text-xl font-bold text-[var(--color-navy)] tracking-tight">MANSYS</div>
             </div>
           </Link>
-        </div>
 
-        <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link href="/" className="hover:text-accent">
-            Home
-          </Link>
-          <Link href="/candidate" className="hover:text-accent">
-            For Candidates
-          </Link>
-          <Link href="/employer" className="hover:text-accent">
-            For Employers
-          </Link>
-          <Link
-            href="/Studio"
-            className="text-xs px-4 py-2 rounded-md border border-accent text-accent"
-          >
-            Studio
-          </Link>
-        </nav>
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
+            <Link href="/" className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors">
+              Home
+            </Link>
+            <Link href="/studio" className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors">
+              Admin Studio
+            </Link>
+            
+            {/* Primary CTA in Header */}
+            <Link 
+              href="/candidate" 
+              className="bg-[var(--color-navy)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--color-accent)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+            >
+              Register as Candidate
+            </Link>
+          </nav>
 
-        <div className="md:hidden">
+          {/* Mobile Menu Button */}
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-md bg-white border"
+            className="md:hidden p-2 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-navy)] z-50 relative"
           >
-            {open ? (
-              <MdClose className="w-5 h-5 text-brand-700" />
-            ) : (
-              <MdMenu className="w-5 h-5 text-brand-700" />
-            )}
+            {open ? <MdClose size={24} /> : <MdMenu size={24} />}
           </button>
         </div>
-      </div>
+      </header>
 
-      <div className={clsx("z-40 md:hidden bg-white border-t", !open && "hidden")}>
-        <div className="flex flex-col p-4 gap-3">
-          <Link href="/" className="block py-2">
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={clsx(
+          "fixed inset-0 bg-[var(--color-paper)] z-40 flex flex-col justify-center items-center transition-all duration-300 ease-in-out md:hidden",
+          open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        )}
+      >
+        <nav className="flex flex-col items-center gap-8 text-xl font-medium">
+          <Link href="/" onClick={() => setOpen(false)} className="text-[var(--color-navy)]">
             Home
           </Link>
-          <Link href="/candidate" className="block py-2">
-            For Candidates
+          <Link href="/studio" onClick={() => setOpen(false)} className="text-[var(--color-navy)]">
+            Admin Studio
           </Link>
-          <Link href="/employer" className="block py-2">
-            For Employers
+          <Link 
+            href="/candidate" 
+            onClick={() => setOpen(false)}
+            className="bg-[var(--color-brand)] text-white px-8 py-4 rounded-full shadow-xl"
+          >
+            Register Now
           </Link>
-          <Link href="/Studio" className="block py-2">
-            Studio
-          </Link>
-        </div>
+        </nav>
       </div>
-    </header>
+    </>
   );
 }
