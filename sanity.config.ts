@@ -7,11 +7,10 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
-
-// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
+import { SendEmailAction } from '@/sanity/actions'
 
 const privateDataset = process.env.NEXT_PRIVATE_SANITY_DATASET;
 
@@ -19,7 +18,6 @@ export default defineConfig({
   basePath: '/Studio',
   projectId,
   dataset: privateDataset || 'production',
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
   plugins: [
     structureTool({structure}),
@@ -27,4 +25,12 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
-})
+  document: {
+    actions: (prev, context) => {
+      if(context.schemaType === 'candidateApplication') {
+        return [SendEmailAction, ...prev];
+      }
+      return prev;
+    },
+  },
+});

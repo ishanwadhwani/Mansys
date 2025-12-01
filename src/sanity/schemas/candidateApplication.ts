@@ -1,4 +1,8 @@
 import { defineType, defineField } from "sanity";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoMdCloseCircle } from "react-icons/io";
+
+import { EmailManager } from "@/components/EmailManager";
 
 export default defineType({
   name: "candidateApplication",
@@ -10,6 +14,16 @@ export default defineType({
       title: "Wants to work in Australia",
       type: "boolean",
       validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: "adminEmailActions",
+      title: "Admin Actions",
+      type: "string",
+      components: {
+        field: EmailManager,
+      },
+      readOnly: true,
     }),
 
     //personal
@@ -179,7 +193,7 @@ export default defineType({
       return {
         title: firstName ? firstName : "New Candidate",
         subtitle: email || "",
-        media: qualified ? "yes" : "no",
+        media: qualified ? FaCheckCircle : IoMdCloseCircle
       };
     },
   },

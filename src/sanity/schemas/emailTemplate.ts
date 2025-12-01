@@ -7,19 +7,27 @@ export default defineType({
   fields: [
     defineField({
       name: "slug",
-      type: "string",
+      type: "slug",
       title: "Slug",
       description: "unique id like qualified-candidate",
+      options: {
+        source: "subject",
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "subject",
       type: "string",
       title: "Subject",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "body",
       type: "text",
       title: "Body (plain text or simple markup)",
+      description:
+        "Use {{firstName}}, {{lastName}}, {{occupation}} as placeholders.",
     }),
     defineField({
       name: "fromEmail",

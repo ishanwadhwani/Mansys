@@ -1,65 +1,124 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+// Ensure path is correct: if components/Hero.tsx, then ../public/hero_c.svg
 import hero_c from "../../../public/hero_c.svg";
 
 export default function Hero() {
   return (
-    <section className="bg-paper">
-      <div className="container grid md:grid-cols-2 gap-8 items-center py-20 mt-4 md:mt-8">
-        <div className="space-y-6">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-brand-700">
-            Connecting Australian Employers with Global Talent
-          </h1>
-          <p className="text-lg text-neutral-600 max-w-xl">
-            We facilitate fully compliant, employer-sponsored visa pathways for
-            the skilled trades you need.
-          </p>
-          <div className="grid sm:grid-cols-2 gap-4 mt-6">
-            <div className="p-4 lg:p-6 rounded-lg bg-white border shadow-soft-md transition-transform duration-300 hover:scale-[1.03]">
-              <h3 className="font-semibold text-brand-700 mb-2">
-                Are You an Employer?
-              </h3>
-              <p className="text-sm text-neutral-600 mb-4">
-                Struggling to find reliable, skilled trades workers? We connect
-                you with a pipeline of vetted overseas candidates.
-              </p>
-              <Link href="/employer" className="inline-block btn-brand">
-                Find Your Workforce
-              </Link>
+    <section className="bg-[var(--color-paper)] pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className="space-y-8 relative">
+            {/* Decorative Star Element (Like Reference) */}
+            <div className="absolute -top-16 -left-10 text-[var(--color-brand)] opacity-20 animate-spin-slow hidden md:block">
+              <svg
+                width="100"
+                height="100"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+              </svg>
             </div>
 
-            <div className="p-4 lg:p-6 rounded-lg bg-white border shadow-soft-md transition-transform duration-300 hover:scale-[1.03]">
-              <h3 className="font-semibold text-brand-700 mb-2">
-                Are You a Skilled Worker?
-              </h3>
-              <p className="text-sm text-neutral-600 mb-4">
-                Looking for an Australian employer to sponsor your work visa?
-                Register your skills to start your journey.
-              </p>
-              <Link href="/candidate" className="inline-block btn-outline">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[var(--color-navy)] leading-[1.1] tracking-tight">
+              Skilled Trades. <br />
+              <span className="text-[var(--color-brand)]">Australian</span>{" "}
+              Jobs.
+            </h1>
+
+            <p className="text-xl text-[var(--text-default)] max-w-lg leading-relaxed opacity-80">
+              We connect qualified professionals with top-tier Australian
+              employers. Fully compliant, stress-free visa pathways.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <Link
+                href="/register"
+                className="group relative inline-flex items-center gap-3 bg-[var(--color-navy)] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-[var(--color-accent)] hover:shadow-xl hover:-translate-y-1"
+              >
                 Start Your Journey
+                <span className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
               </Link>
+
+              <div className="flex items-center gap-2 px-6 py-4 rounded-full border border-[var(--color-secondary)]/30 text-[var(--color-navy)] font-medium">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Jobs available now
+              </div>
+            </div>
+
+            {/* Trusted By / Logos (Simplified) */}
+            <div className="pt-12">
+              <p className="text-sm font-semibold text-[var(--color-secondary)] uppercase tracking-wider mb-4">
+                Trades We Place
+              </p>
+              <div className="flex gap-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <span className="font-bold text-xl text-[var(--color-navy)]">
+                  Bricklayers
+                </span>
+                <span className="font-bold text-xl text-[var(--color-navy)]">
+                  Welders
+                </span>
+                <span className="font-bold text-xl text-[var(--color-navy)]">
+                  Carpenters
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-center justify-center">
-          <div className="relative w-full max-w-md">
-            <Image src={hero_c} alt="hero banner" />
-            <a
-              href="/explore"
-              className="hidden lg:block absolute z-10 -bottom-[10%] left-[90%] items-center gap-2 text-white bg-[var(--color-accent)] rounded-full p-6 text-sm text-center font-semibold shadow-lg hover:bg-brand motion-safe:animate-bounce transition-all duration-300 hover:scale-105 group"
-              //   onMouseOver={e => e.currentTarget.style.backgroundColor = 'var(--hover-bg)'}
-              //   onMouseOut={e => e.currentTarget.style.backgroundColor = 'var(--color-accent)'}
-            >
-              Explore life in Australia
-            </a>
-            <a
-              href="/explore"
-              className="lg:hidden mt-6 w-sm flex items-center justify-center gap-2 text-white bg-[var(--color-accent)] px-2 py-3 rounded-full text-sm text-center font-semibold shadow-lg hover:bg-brand transition-all duration-300 hover:scale-105 group"
-            >
-              Explore life in Australia
-            </a>
+
+          {/* Right Content - The "Split Image" Look */}
+          <div className="relative">
+            <div className="grid grid-cols-2 gap-4">
+              {/* Image 1: The Worker */}
+              <div className="relative h-[300px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-2xl mt-12 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                <Image
+                  src={hero_c} // Replace with a worker image
+                  alt="Skilled Worker"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-[var(--color-navy)]/10"></div>
+              </div>
+
+              {/* Image 2: The Lifestyle */}
+              <div className="relative h-[300px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-2xl -mt-12 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                {/* Using a colored div as placeholder if you don't have a second image yet */}
+                <div className="absolute inset-0 bg-[var(--color-brand)]/10 flex items-center justify-center">
+                  <span className="text-[var(--color-navy)] font-bold text-lg">
+                    Lifestyle
+                  </span>
+                </div>
+                <Image
+                  src={hero_c} // Replace with lifestyle image
+                  alt="Australian Lifestyle"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Floating Badge (Like the 'Work' pill in reference) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-2xl shadow-xl border border-[var(--color-brand)]/20 text-center max-w-[180px] hidden lg:block animate-float">
+              <span className="text-3xl mb-1 block">🇦🇺</span>
+              <p className="text-sm font-bold text-[var(--color-navy)]">
+                99% Visa Success Rate
+              </p>
+            </div>
           </div>
         </div>
       </div>

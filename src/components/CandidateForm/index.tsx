@@ -2,14 +2,6 @@
 import React, { useState } from "react";
 import { useForm, Controller, Control, RegisterOptions } from "react-hook-form";
 
-// --- Theme Configuration (Applied via Tailwind Arbitrary Values) ---
-// Brand: #64a9ec
-// Accent: #517ac6
-// Navy: #2b4592
-// Paper: #fefeff
-// Text: #0b2540
-// Muted: #6b7280
-
 type FormValues = {
   wantsToWorkInAustralia: boolean;
   firstName: string;
@@ -95,6 +87,35 @@ const englishOptions = [
   "Very Good",
   "Excellent",
 ];
+
+const englishLevelTooltip = (
+  <div className="text-left space-y-1.5 min-w-[220px]">
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">Bad</span> — Very
+      little English
+    </p>
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">Little</span> —
+      Basic English only
+    </p>
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">OK</span> — Simple
+      conversation possible
+    </p>
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">Good</span> —
+      Comfortable speaking English
+    </p>
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">Very Good</span> —
+      Strong English skills
+    </p>
+    <p>
+      <span className="font-bold text-[var(--color-brand)]">Excellent</span> —
+      Fluent English
+    </p>
+  </div>
+);
 
 export default function CandidateForm() {
   const {
@@ -184,14 +205,16 @@ export default function CandidateForm() {
     }
   };
 
-  // --- Reusable "Chip" Selection Component ---
   type SelectionGroupProps<Name extends keyof FormValues> = {
     label: string;
     name: Name;
     options: string[];
     control: Control<FormValues>;
     rules?: RegisterOptions<FormValues, Name>;
+    tooltipContent?: React.ReactNode;
   };
+
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const SelectionGroup = <Name extends keyof FormValues>({
     label,
@@ -199,11 +222,56 @@ export default function CandidateForm() {
     options,
     control,
     rules = { required: true } as RegisterOptions<FormValues, Name>,
+    tooltipContent,
   }: SelectionGroupProps<Name>) => (
     <div className="mb-8">
-      <label className="block text-[#0b2540] text-lg font-semibold mb-3">
-        {label} <span className="text-red-500">*</span>
-      </label>
+      <div className="flex items-center gap-2 mb-3">
+        <label className="block text-[var(--text-default)] text-lg font-semibold">
+          {label} <span className="text-red-500">*</span>
+        </label>
+
+        {/* Tooltip Icon & Popup (Only renders if content is provided) */}
+        {tooltipContent && (
+          <div className="relative">
+            <div
+              className="cursor-help text-[var(--color-secondary)] hover:text-[var(--color-brand)] transition-colors duration-200 p-1"
+              onMouseEnter={() => setIsTooltipOpen(true)}
+              onMouseLeave={() => setIsTooltipOpen(false)}
+              onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+            >
+              {/* Icon */}
+              {/* <div className="cursor-help text-[var(--muted)]/70 hover:text-[var(--color-brand)] transition-colors duration-200"> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm8.706-1.442c1.146-.573 2.437.463 2.126 1.706l-.709 2.836.042-.02a.75.75 0 01.67 1.34l-.04.022c-1.147.573-2.438-.463-2.127-1.706l.71-2.836-.042.02a.75.75 0 11-.671-1.34l.041-.022zM12 9a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+
+            {/* Popup Box */}
+            <div
+              className={`
+                  absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 p-4 
+                  bg-[var(--color-navy)] text-[var(--color-paper)] text-xs rounded-xl shadow-2xl 
+                  transition-all duration-300 transform 
+                  w-max max-w-[260px] md:max-w-sm pointer-events-none
+                  ${isTooltipOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible translate-y-2"}
+                `}
+            >
+              {tooltipContent}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[var(--color-navy)]"></div>
+            </div>
+          </div>
+        )}
+      </div>
+
       <Controller
         name={name}
         control={control}
@@ -299,6 +367,7 @@ export default function CandidateForm() {
           name="englishLevel"
           options={englishOptions}
           control={control}
+          tooltipContent={englishLevelTooltip}
         />
 
         <hr className="border-[var(--color-secondary)]/30 my-8" />
