@@ -10,9 +10,9 @@ import Image from "next/image";
 // However, standard Next.js allows importing from public if configured, but let's assume relative path.
 // Better yet, for public assets, we can often just use the string path "/logo.png" with Image src if we know dimensions,
 // but importing gives us sizing. I will stick to the user's pattern but correct the depth if needed.
-// User had "../../../public/logo.png" which implies components/Header.tsx is deep? 
+// User had "../../../public/logo.png" which implies components/Header.tsx is deep?
 // No, user likely moved files. If Header.tsx is in `components/`, and `public/` is root, it is `../public/logo.png`.
-import logo from "../../../public/logo.png"; 
+import logo from "../../../public/logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -30,29 +30,54 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-secondary)]/20">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-          
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3 z-50 relative">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-              <Image src={logo} alt="MANSYS Logo" className="rounded-lg "/>
+              <Image src={logo} alt="MANSYS Logo" className="rounded-lg " />
             </div>
             <div>
-              <div className="text-xl font-bold text-[var(--color-navy)] tracking-tight">MANSYS</div>
+              <div className="text-xl font-bold text-[var(--color-navy)] tracking-tight">
+                MANSYS
+              </div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
-            <Link href="/" className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors">
+            <Link
+              href="/"
+              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+            >
               Home
             </Link>
-            <Link href="/studio" className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors">
-              Admin Studio
+            <Link
+              href="/why-australia"
+              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+            >
+              Why Australia
             </Link>
-            
+            <Link
+              href="/blog"
+              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/faqs"
+              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+            >
+              FAQs
+            </Link>
+            <Link
+              href="/contact"
+              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+            >
+              Contact
+            </Link>
+
             {/* Primary CTA in Header */}
-            <Link 
-              href="/candidate" 
+            <Link
+              href="/candidate"
               className="bg-[var(--color-navy)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--color-accent)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Register as Candidate
@@ -71,21 +96,52 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div 
+      <div
         className={clsx(
           "fixed inset-0 bg-[var(--color-paper)] z-40 flex flex-col justify-center items-center transition-all duration-300 ease-in-out md:hidden",
-          open ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          open
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         )}
       >
         <nav className="flex flex-col items-center gap-8 text-xl font-medium">
-          <Link href="/" onClick={() => setOpen(false)} className="text-[var(--color-navy)]">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="text-[var(--color-navy)]"
+          >
             Home
           </Link>
-          <Link href="/studio" onClick={() => setOpen(false)} className="text-[var(--color-navy)]">
-            Admin Studio
+          <Link
+            href="/why-australia"
+            onClick={() => setOpen(false)}
+            className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+          >
+            Why Australia
           </Link>
-          <Link 
-            href="/candidate" 
+          <Link
+            href="/blog"
+            onClick={() => setOpen(false)}
+            className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/faqs"
+            onClick={() => setOpen(false)}
+            className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+          >
+            FAQs
+          </Link>
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/candidate"
             onClick={() => setOpen(false)}
             className="bg-[var(--color-brand)] text-white px-8 py-4 rounded-full shadow-xl"
           >
