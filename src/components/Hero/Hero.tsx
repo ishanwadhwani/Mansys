@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 // Ensure path is correct: if components/Hero.tsx, then ../public/hero_c.svg
 import hero_c from "../../../public/hero_c.svg";
+import beach_Australia from "../../../public/beach_Australia.jpg";
+import Sydney_Opera_House from "../../../public/Sydney_Opera_House.jpg";
+import worker1 from "../../../public/worker1.jpg";
+import worker2 from "../../../public/worker2.jpg";
 
 export default function Hero() {
   return (
@@ -83,11 +87,11 @@ export default function Hero() {
 
           {/* Right Content - The "Split Image" Look */}
           <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 mt-6 lg:mt-0">
               {/* Image 1: The Worker */}
               <div className="relative h-[300px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-2xl mt-12 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
                 <Image
-                  src={hero_c} // Replace with a worker image
+                  src={worker2}
                   alt="Skilled Worker"
                   fill
                   className="object-cover"
@@ -104,7 +108,7 @@ export default function Hero() {
                   </span>
                 </div>
                 <Image
-                  src={hero_c} // Replace with lifestyle image
+                  src={beach_Australia}
                   alt="Australian Lifestyle"
                   fill
                   className="object-cover"
@@ -113,12 +117,15 @@ export default function Hero() {
             </div>
 
             {/* Floating Badge (Like the 'Work' pill in reference) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-2xl shadow-xl border border-[var(--color-brand)]/20 text-center max-w-[180px] hidden lg:block animate-float">
+            {/* <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[var(--color-accent)]/10 via-gray-100/50 to-[var(--color-primary)]/30 p-4 rounded-4xl shadow-xl hover:shadow-2xl border border-[var(--color-accent)]/50 text-center max-w-[180px] hidden lg:block animate-float duration-300"
+            >
               <span className="text-3xl mb-1 block">🇦🇺</span>
-              <p className="text-sm font-bold text-[var(--color-navy)]">
-                99% Visa Success Rate
+              <p className="flex flex-col text-sm font-bold text-[var(--color-navy)]">
+                99% Visa
+                <span>Success Rate</span>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
