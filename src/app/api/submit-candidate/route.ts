@@ -18,8 +18,10 @@ interface CandidateDoc {
   occupation?: string;
   occupationOther?: string;
   countryOfEmployment?: string;
+  countryOfEmploymentOther?: string;
   hasPassport?: boolean;
   passportCountry?: string;
+  passportCountryOther?: string;
   experienceYears?: number;
   englishLevel?: string;
   qualifications?: string[];
@@ -47,7 +49,7 @@ const parseForm = async (
   nodeReq.push(null);
 
   const headers = Object.fromEntries(req.headers);
-  
+
   const incomingReq = nodeReq as unknown as IncomingMessage;
   incomingReq.headers = headers;
   incomingReq.method = req.method ?? "POST";
@@ -62,10 +64,10 @@ const parseForm = async (
 };
 
 const getSingleValue = (field: string | string[] | undefined): string => {
-    if (Array.isArray(field)) {
-        return field.length > 0 ? field[0] : "";
-    }
-    return typeof field === "string" ? field : "";
+  if (Array.isArray(field)) {
+    return field.length > 0 ? field[0] : "";
+  }
+  return typeof field === "string" ? field : "";
 };
 
 const toBool = (v: unknown): boolean => {
@@ -95,8 +97,7 @@ const toStringArray = (raw: unknown): string[] => {
       try {
         const parsed = JSON.parse(trimmed);
         if (Array.isArray(parsed)) return parsed.map(String);
-      } catch {
-      }
+      } catch {}
     }
     if (trimmed.includes(","))
       return trimmed
@@ -114,8 +115,7 @@ async function evaluateQualification(payload: {
   experienceYears: number;
   englishLevel: string;
 }): Promise<QualifiedResult> {
-  
-  const MIN_EXPERIENCE_YEARS = 2; 
+  const MIN_EXPERIENCE_YEARS = 2;
 
   const reasons: string[] = [];
   let qualified = true;
@@ -147,7 +147,7 @@ async function evaluateQualification(payload: {
   // 4. English Level Check (Must be OK or higher)
   const requiredEnglish = ["ok", "good", "very good", "excellent"];
   const currentEnglish = payload.englishLevel.trim().toLowerCase();
-  
+
   if (!requiredEnglish.includes(currentEnglish)) {
     qualified = false;
     reasons.push("English level must be OK or higher");
@@ -162,7 +162,7 @@ export async function POST(req: Request): Promise<Response> {
 
     const wantsRaw = getSingleValue(fields.wantsToWorkInAustralia);
     const wants = toBool(wantsRaw);
-    
+
     if (!wants) {
       const minimal: CandidateDoc = {
         _type: "candidateApplication",
@@ -190,15 +190,20 @@ export async function POST(req: Request): Promise<Response> {
     const phone = getSingleValue(fields.phone);
     const occupation = getSingleValue(fields.occupation);
     const occupationOther = getSingleValue(fields.occupationOther);
-    const countryOfEmployment = getSingleValue(fields.countryOfEmployment); 
+    const countryOfEmployment = getSingleValue(fields.countryOfEmployment);
+    const countryOfEmploymentOther = getSingleValue(
+      fields.countryOfEmploymentOther
+    );
     const hasPassport = toBool(getSingleValue(fields.hasPassport));
     const passportCountry = getSingleValue(fields.passportCountry);
-    const experienceYears = toNumber(getSingleValue(fields.experienceYears)); 
-    const englishLevel = getSingleValue(fields.englishLevel); 
-      
-    const qualificationsRaw = fields["qualifications[]"] ?? fields.qualifications;
+    const passportCountryOther = getSingleValue(fields.passportCountryOther);
+    const experienceYears = toNumber(getSingleValue(fields.experienceYears));
+    const englishLevel = getSingleValue(fields.englishLevel);
+
+    const qualificationsRaw =
+      fields["qualifications[]"] ?? fields.qualifications;
     const qualifications = toStringArray(qualificationsRaw);
-    
+
     const consent = toBool(getSingleValue(fields.consent));
     const source = getSingleValue(fields.source);
 
@@ -212,7 +217,9 @@ export async function POST(req: Request): Promise<Response> {
     // CV upload
     let cvRef: { _type: "reference"; _ref: string } | undefined;
     if (files && files.cv) {
-      const fileEntry = Array.isArray(files.cv) ? files.cv[0] : (files.cv as File);
+      const fileEntry = Array.isArray(files.cv)
+        ? files.cv[0]
+        : (files.cv as File);
       if (fileEntry && fileEntry.filepath) {
         const stream = fs.createReadStream(fileEntry.filepath);
         const asset = await writeClient.assets.upload(
@@ -228,11 +235,26 @@ export async function POST(req: Request): Promise<Response> {
     const candidate: CandidateDoc = {
       _type: "candidateApplication",
       wantsToWorkInAustralia: true,
-      firstName, lastName, email, phone, occupation, occupationOther,
-      countryOfEmployment, hasPassport, passportCountry, experienceYears,
-      englishLevel, qualifications, consent, source, qualified,
+      firstName,
+      lastName,
+      email,
+      phone,
+      occupation,
+      occupationOther,
+      countryOfEmployment,
+      countryOfEmploymentOther,
+      hasPassport,
+      passportCountry,
+      passportCountryOther,
+      experienceYears,
+      englishLevel,
+      qualifications,
+      consent,
+      source,
+      qualified,
       qualificationReason: reasons.join("; "),
-      emailSent: false, emailSentAt: null,
+      emailSent: false,
+      emailSentAt: null,
       createdAt: new Date().toISOString(),
     };
     if (cvRef) candidate.cv = cvRef;
@@ -241,11 +263,13 @@ export async function POST(req: Request): Promise<Response> {
     //Client Message and Send Email
     let clientMessage = "";
     if (qualified) {
-      clientMessage = "Congratulations! You may qualify for sponsorship to work in Australia. Most jobs start from AUD 80,000 per year (minimum). Our office will contact you shortly.";
+      clientMessage =
+        "Congratulations! You may qualify for sponsorship to work in Australia. Most jobs start from AUD 80,000 per year (minimum). Our office will contact you shortly.";
     } else {
-      clientMessage = "You have strong skills and experience. To check your full eligibility for an Australian work visa, our office needs to speak with you.";
+      clientMessage =
+        "You have strong skills and experience. To check your full eligibility for an Australian work visa, our office needs to speak with you.";
     }
-    
+
     // Conditional Email Sending Logic (uses existing Sanity logic)
     const settingsQuery = `*[_type == "siteSettings"][0]{sendEmailOnQualified}`;
     const settings = await writeClient.fetch(settingsQuery);
@@ -259,16 +283,15 @@ export async function POST(req: Request): Promise<Response> {
 
     // Final API Response with Pop-up Message
     return new Response(
-      JSON.stringify({ 
-        ok: true, 
-        qualified, 
-        reasons, 
-        id: created._id, 
-        message: clientMessage
+      JSON.stringify({
+        ok: true,
+        qualified,
+        reasons,
+        id: created._id,
+        message: clientMessage,
       }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
-    
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error("submit-candidate error:", msg);
