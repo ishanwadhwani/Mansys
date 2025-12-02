@@ -5,19 +5,11 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-// Ensure this path is correct relative to components/Header.tsx
-// If components is at root, and public is at root, this should be "../public/logo.png"
-// However, standard Next.js allows importing from public if configured, but let's assume relative path.
-// Better yet, for public assets, we can often just use the string path "/logo.png" with Image src if we know dimensions,
-// but importing gives us sizing. I will stick to the user's pattern but correct the depth if needed.
-// User had "../../../public/logo.png" which implies components/Header.tsx is deep?
-// No, user likely moved files. If Header.tsx is in `components/`, and `public/` is root, it is `../public/logo.png`.
 import logo from "../../../public/logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -43,7 +35,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8 font-medium text-sm">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm">
             <Link
               href="/"
               className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
@@ -56,12 +48,12 @@ export default function Header() {
             >
               Why Australia
             </Link>
-            <Link
+            {/* <Link
               href="/blog"
               className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
             >
               Blog
-            </Link>
+            </Link> */}
             <Link
               href="/faqs"
               className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
@@ -119,13 +111,13 @@ export default function Header() {
           >
             Why Australia
           </Link>
-          <Link
+          {/* <Link
             href="/blog"
             onClick={() => setOpen(false)}
             className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
           >
             Blog
-          </Link>
+          </Link> */}
           <Link
             href="/faqs"
             onClick={() => setOpen(false)}

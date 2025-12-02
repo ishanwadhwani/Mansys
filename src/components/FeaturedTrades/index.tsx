@@ -4,6 +4,7 @@ import Image from "next/image";
 import welder from "../../../public/welder.jpg";
 import bricklayer from "../../../public/bricklayer.jpg";
 import carpenter from "../../../public/carpenter.png";
+import Link from "next/link";
 
 export default function Featuredtrades() {
   const trades = [
@@ -28,7 +29,6 @@ export default function Featuredtrades() {
   ];
 
   return (
-    // Changed bg to a very dark blue/slate to match the reference image's premium feel
     <section className="py-24 bg-[var(--color-navy)] text-white relative overflow-hidden">
       {/* Background Decor 1: Top Right Glow */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[var(--color-brand)]/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
@@ -52,12 +52,12 @@ export default function Featuredtrades() {
             </p>
           </div>
 
-          <a
-            href="/register"
+          <Link
+            href="/candidate"
             className="inline-flex items-center justify-center whitespace-nowrap bg-[var(--color-brand)] hover:bg-[var(--color-accent)] text-white px-8 py-4 rounded-full font-bold transition-all shadow-lg hover:shadow-[var(--color-brand)]/50 transform hover:-translate-y-1"
           >
             Check Eligibility
-          </a>
+          </Link>
         </div>
 
         {/* Cards Grid */}
@@ -65,7 +65,6 @@ export default function Featuredtrades() {
           {trades.map((trade, idx) => (
             <div
               key={idx}
-              // Added h-full to ensure equal height
               className="group relative flex flex-col h-full bg-white/5 border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:border-[var(--color-brand)]/50 transition-all duration-500 cursor-default"
             >
               {/* Card Content Wrapper */}

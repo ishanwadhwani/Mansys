@@ -1,11 +1,9 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
-// Ensure path is correct: if components/Hero.tsx, then ../public/hero_c.svg
-import hero_c from "../../../public/hero_c.svg";
+
 import beach_Australia from "../../../public/beach_Australia.jpg";
-import Sydney_Opera_House from "../../../public/Sydney_Opera_House.jpg";
-import worker1 from "../../../public/worker1.jpg";
 import worker2 from "../../../public/worker2.jpg";
 
 export default function Hero() {
@@ -40,7 +38,7 @@ export default function Hero() {
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <Link
-                href="/register"
+                href="/candidate"
                 className="group relative inline-flex items-center gap-3 bg-[var(--color-navy)] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-[var(--color-accent)] hover:shadow-xl hover:-translate-y-1"
               >
                 Start Your Journey
@@ -66,7 +64,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Trusted By / Logos (Simplified) */}
             <div className="pt-12">
               <p className="text-sm font-semibold text-[var(--color-secondary)] uppercase tracking-wider mb-4">
                 Trades We Place
@@ -101,7 +98,6 @@ export default function Hero() {
 
               {/* Image 2: The Lifestyle */}
               <div className="relative h-[300px] md:h-[400px] rounded-[2rem] overflow-hidden shadow-2xl -mt-12 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                {/* Using a colored div as placeholder if you don't have a second image yet */}
                 <div className="absolute inset-0 bg-[var(--color-brand)]/10 flex items-center justify-center">
                   <span className="text-[var(--color-navy)] font-bold text-lg">
                     Lifestyle
@@ -116,7 +112,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Floating Badge (Like the 'Work' pill in reference) */}
             {/* <div
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-[var(--color-accent)]/10 via-gray-100/50 to-[var(--color-primary)]/30 p-4 rounded-4xl shadow-xl hover:shadow-2xl border border-[var(--color-accent)]/50 text-center max-w-[180px] hidden lg:block animate-float duration-300"
             >

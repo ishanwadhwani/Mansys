@@ -1,6 +1,8 @@
 "use client";
 import { IconType } from "react-icons";
 import CandidateForm from "@/components/CandidateForm";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 
 import {
   PiSealCheckBold,
@@ -10,105 +12,106 @@ import {
 
 export default function RegisterPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-paper)] text-[var(--text-default)] font-sans">
-      <div className="flex flex-col lg:flex-row min-h-screen">
-        {/* --- LEFT SIDE: Form Section (Scrollable) --- */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center p-4 md:p-8 lg:p-14 xl:p-16 order-2 lg:order-1">
-          <div className="max-w-xl mx-auto w-full py-16">
-            {/* Page Title (Visible here since global header is moved) */}
-            <div className="mb-8">
-              <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--color-navy)] mb-2">
-                Register Here
-              </h1>
-              <p className="text-[var(--color-accent)] font-medium text-lg">
-                Complete your profile to connect with Australian employers.
-              </p>
-            </div>
-            {/* Candidate Registration Form */}
-            <CandidateForm />
-            {/* Mobile-only Bottom Content (Detailed Benefits) */}
-            <div className="lg:hidden mt-12">
+    <>
+      <Header />
+      <main className="min-h-screen bg-[var(--color-paper)] text-[var(--text-default)] font-sans">
+        <div className="flex flex-col lg:flex-row min-h-screen">
+          {/* --- LEFT SIDE: Form Section (Scrollable) --- */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center p-4 md:p-8 lg:p-14 xl:p-16 order-2 lg:order-1">
+            <div className="max-w-xl mx-auto w-full py-16">
+              <div className="mb-8">
+                <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--color-navy)] mb-2">
+                  Register Here
+                </h1>
+                <p className="text-[var(--color-accent)] font-medium text-lg">
+                  Complete your profile to connect with Australian employers.
+                </p>
+              </div>
+              {/* Candidate Registration Form */}
+              <CandidateForm />
+              {/* Mobile-only Bottom Content (Detailed Benefits) */}
+              {/* <div className="lg:hidden mt-12">
               <MobileTrustPanel />
+            </div> */}
+            </div>
+          </div>
+
+          <div className="w-full lg:w-1/2 bg-[var(--color-navy)] text-[var(--color-paper)] p-8 lg:p-12 xl:p-20 flex flex-col justify-center lg:sticky lg:top-8 xl:top-0 lg:h-screen order-1 lg:order-2 overflow-hidden relative shadow-2xl">
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-brand)]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
+
+            <div className="relative z-10 space-y-10 max-w-lg mx-auto lg:mx-0 h-full flex flex-col justify-center">
+              {/* Header Section */}
+              <div className="text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 bg-[var(--color-paper)]/10 px-4 py-1.5 rounded-full text-xs font-semibold text-[var(--color-brand)] border border-[var(--color-brand)]/20 mb-6 uppercase tracking-wider">
+                  Trusted Migration Partners
+                </div>
+                <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                  Why Choose{" "}
+                  <span className="text-[var(--color-brand)]">MANSYS?</span>
+                </h2>
+                <p className="text-[var(--color-secondary)] text-lg leading-relaxed">
+                  A partnership you can trust. We build long-term relationships
+                  by focusing on specialisation, quality vetting, and total
+                  compliance.
+                </p>
+              </div>
+
+              {/* Stats Row */}
+              <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-[var(--color-paper)]/10">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-[var(--color-paper)]">
+                    10+
+                  </div>
+                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
+                    Years Experience
+                  </div>
+                </div>
+                <div className="text-center border-l border-[var(--color-paper)]/10">
+                  <div className="text-3xl font-bold text-[var(--color-paper)]">
+                    500+
+                  </div>
+                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
+                    Clients Supported
+                  </div>
+                </div>
+                <div className="text-center border-l border-[var(--color-paper)]/10">
+                  <div className="text-3xl font-bold text-[var(--color-brand)]">
+                    99%
+                  </div>
+                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
+                    Success Rate
+                  </div>
+                </div>
+              </div>
+
+              {/* Trust Pillars (Cards) */}
+              <div className="flex gap-6">
+                <TrustCard
+                  Icon={PiSparkleBold}
+                  title="Specialists"
+                  // desc=""
+                />
+                <TrustCard
+                  Icon={PiSealCheckBold}
+                  title="Verified"
+                  // desc="We support candidates with CVs and interview coaching, ensuring employers meet people who are ready to work."
+                />
+                <TrustCard
+                  Icon={PiShieldCheckBold}
+                  title="Compliant"
+                  // desc="We partner with MARN-registered agents to handle all visa advice, ensuring a 100% compliant process."
+                />
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="w-full lg:w-1/2 bg-[var(--color-navy)] text-[var(--color-paper)] p-8 lg:p-12 xl:p-20 flex flex-col justify-center lg:sticky lg:top-8 xl:top-0 lg:h-screen order-1 lg:order-2 overflow-hidden relative shadow-2xl">
-          {/* Background Decorative Elements */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-brand)]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
-
-          <div className="relative z-10 space-y-10 max-w-lg mx-auto lg:mx-0 h-full flex flex-col justify-center">
-            {/* Header Section */}
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-[var(--color-paper)]/10 px-4 py-1.5 rounded-full text-xs font-semibold text-[var(--color-brand)] border border-[var(--color-brand)]/20 mb-6 uppercase tracking-wider">
-                Trusted Migration Partners
-              </div>
-              <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
-                Why Choose{" "}
-                <span className="text-[var(--color-brand)]">MANSYS?</span>
-              </h2>
-              <p className="text-[var(--color-secondary)] text-lg leading-relaxed">
-                A partnership you can trust. We build long-term relationships by
-                focusing on specialisation, quality vetting, and total
-                compliance.
-              </p>
-            </div>
-
-            {/* Stats Row */}
-            <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-[var(--color-paper)]/10">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--color-paper)]">
-                  10+
-                </div>
-                <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                  Years Experience
-                </div>
-              </div>
-              <div className="text-center border-l border-[var(--color-paper)]/10">
-                <div className="text-3xl font-bold text-[var(--color-paper)]">
-                  500+
-                </div>
-                <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                  Clients Supported
-                </div>
-              </div>
-              <div className="text-center border-l border-[var(--color-paper)]/10">
-                <div className="text-3xl font-bold text-[var(--color-brand)]">
-                  99%
-                </div>
-                <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                  Success Rate
-                </div>
-              </div>
-            </div>
-
-            {/* Trust Pillars (Cards) */}
-            <div className="flex gap-6">
-              <TrustCard
-                Icon={PiSparkleBold}
-                title="Specialists"
-                // desc=""
-              />
-              <TrustCard
-                Icon={PiSealCheckBold}
-                title="Verified"
-                // desc="We support candidates with CVs and interview coaching, ensuring employers meet people who are ready to work."
-              />
-              <TrustCard
-                Icon={PiShieldCheckBold}
-                title="Compliant"
-                // desc="We partner with MARN-registered agents to handle all visa advice, ensuring a 100% compliant process."
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   );
 }
-
-// --- Helper Components ---
 
 const TrustCard = ({
   Icon,
