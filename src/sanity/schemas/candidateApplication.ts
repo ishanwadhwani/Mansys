@@ -94,6 +94,13 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
 
+    defineField({
+      name: "countryOfEmploymentOther",
+      type: "string",
+      title: "Country of Employment (Other)",
+      hidden: ({ document }) => document?.countryOfEmployment !== "Other",
+    }),
+
     // Experience and skills
     defineField({
       name: "experienceYears",
@@ -116,7 +123,9 @@ export default defineType({
       name: "englishLevel",
       type: "string",
       title: "English level",
-      options: { list: ["Bad", "Little", "OK", "Good", "Very Good", "Excellent"] },
+      options: {
+        list: ["Bad", "Little", "OK", "Good", "Very Good", "Excellent"],
+      },
     }),
     defineField({
       name: "passportCountry",
@@ -136,6 +145,15 @@ export default defineType({
         ],
       },
     }),
+
+    defineField({
+      name: "passportCountryOther",
+      type: "string",
+      title: "Passport Country (Other)",
+      hidden: ({ document }) => document?.passportCountry !== "Other",
+    }),
+
+    // misc qualifications
     defineField({
       name: "qualifications",
       title: "Qualifications",
@@ -193,7 +211,7 @@ export default defineType({
       return {
         title: firstName ? firstName : "New Candidate",
         subtitle: email || "",
-        media: qualified ? FaCheckCircle : IoMdCloseCircle
+        media: qualified ? FaCheckCircle : IoMdCloseCircle,
       };
     },
   },

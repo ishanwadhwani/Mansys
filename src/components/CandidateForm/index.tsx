@@ -13,7 +13,9 @@ type FormValues = {
   occupationOther?: string;
   experienceYears: string;
   countryOfEmployment: string;
+  countryOfEmploymentOther?: string;
   passportCountry: string;
+  passportCountryOther?: string;
   englishLevel: string;
   consent: boolean;
 };
@@ -138,7 +140,10 @@ export default function CandidateForm() {
   } | null>(null);
 
   const [loading, setLoading] = useState(false);
+
   const watchOccupation = watch("occupation");
+  const watchCountryOfEmployment = watch("countryOfEmployment");
+  const watchPassportCountry = watch("passportCountry");
 
   const onSubmit = async (data: FormValues) => {
     setLoading(true);
@@ -158,14 +163,23 @@ export default function CandidateForm() {
       fd.append("occupationOther", data.occupationOther);
     }
 
-    // Normalize experience string to number if needed by backend logic
+    fd.append("countryOfEmployment", data.countryOfEmployment || "");
+    if (data.countryOfEmployment === "Other" && data.countryOfEmploymentOther) {
+      fd.append("countryOfEmploymentOther", data.countryOfEmploymentOther);
+    }
+
+    fd.append("passportCountry", data.passportCountry || "");
+    if (data.passportCountry === "Other" && data.passportCountryOther) {
+      fd.append("passportCountryOther", data.passportCountryOther);
+    }
+
     const expIndex = experienceOptions.indexOf(data.experienceYears);
     const expValue =
       expIndex >= 0 ? (expIndex + 1).toString() : data.experienceYears;
     fd.append("experienceYears", expValue);
 
-    fd.append("countryOfEmployment", data.countryOfEmployment || "");
-    fd.append("passportCountry", data.passportCountry || "");
+    // fd.append("countryOfEmployment", data.countryOfEmployment || "");
+    // fd.append("passportCountry", data.passportCountry || "");
     fd.append("englishLevel", data.englishLevel || "");
     fd.append("consent", String(Boolean(data.consent)));
 
@@ -355,12 +369,38 @@ export default function CandidateForm() {
           control={control}
         />
 
+        {watchCountryOfEmployment === "Other" && (
+          <div className="mb-8 animate-fadeIn">
+            <label className="block text-[var(--text-default)] text-sm font-medium mb-2">
+              Please specify country
+            </label>
+            <input
+              {...register("countryOfEmploymentOther", { required: true })}
+              className="w-full md:w-1/2 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] outline-none"
+              placeholder="e.g. United Kingdom"
+            />
+          </div>
+        )}
+
         <SelectionGroup
           label="Your Passport Country"
           name="passportCountry"
           options={passportCountryOptions}
           control={control}
         />
+
+        {watchPassportCountry === "Other" && (
+          <div className="mb-8 animate-fadeIn">
+            <label className="block text-[var(--text-default)] text-sm font-medium mb-2">
+              Please specify passport country
+            </label>
+            <input
+              {...register("passportCountryOther", { required: true })}
+              className="w-full md:w-1/2 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] outline-none"
+              placeholder="e.g. Malaysia"
+            />
+          </div>
+        )}
 
         <SelectionGroup
           label="Your English Level"
