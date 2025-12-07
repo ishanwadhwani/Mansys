@@ -5,7 +5,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import logo from "../../../public/logo.png";
+import mansys_logo from "../../../public/mansys_logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -20,15 +20,15 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-paper)]/90 backdrop-blur-md border-b border-[var(--color-secondary)]/20">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-navy)] backdrop-blur-md border-b border-[var(--color-secondary)]/20">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3 z-50 relative">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-              <Image src={logo} alt="MANSYS Logo" className="rounded-lg " />
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+              <Image src={mansys_logo} alt="MANSYS Logo" className="rounded-lg " />
             </div>
             <div>
-              <div className="text-xl font-bold text-[var(--color-navy)] tracking-tight">
+              <div className="text-xl font-bold text-[var(--color-paper)] tracking-tight">
                 MANSYS
               </div>
             </div>
@@ -38,13 +38,13 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm">
             <Link
               href="/"
-              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+              className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
             >
               Home
             </Link>
             <Link
               href="/why-australia"
-              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+              className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
             >
               Why Australia
             </Link>
@@ -56,13 +56,13 @@ export default function Header() {
             </Link> */}
             <Link
               href="/faqs"
-              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+              className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
             >
               FAQs
             </Link>
             <Link
               href="/contact"
-              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+              className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
             >
               Contact
             </Link>
@@ -70,7 +70,7 @@ export default function Header() {
             {/* Primary CTA in Header */}
             <Link
               href="/candidate"
-              className="bg-[var(--color-navy)] text-white px-6 py-2.5 rounded-full hover:bg-[var(--color-accent)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="bg-[var(--color-paper)]/90 text-[var(--color-navy)] font-bold px-6 py-2.5 rounded-full hover:bg-[var(--color-paper)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Register as Candidate
             </Link>

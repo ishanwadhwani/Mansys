@@ -40,9 +40,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">
-              Explore
-            </h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Explore</h3>
             <ul className="space-y-4 text-sm text-[var(--color-secondary)]">
               <li>
                 <Link href="/" className="hover:text-white transition-colors">
@@ -78,13 +76,11 @@ export default function Footer() {
 
           {/* Column 3: Support */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">
-              Support
-            </h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Support</h3>
             <ul className="space-y-4 text-sm text-[var(--color-secondary)]">
               <li>
                 <Link
-                  href="/faq"
+                  href="/faqs"
                   className="hover:text-white transition-colors"
                 >
                   FAQ
@@ -119,9 +115,7 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-white">
-              Get in Touch
-            </h3>
+            <h3 className="text-lg font-bold mb-6 text-white">Get in Touch</h3>
             <ul className="space-y-4 text-sm text-[var(--color-secondary)]">
               <li className="flex gap-3 items-start">
                 <span className="text-[var(--color-brand)] font-bold">
@@ -150,9 +144,9 @@ export default function Footer() {
                   Office:
                 </span>
                 <span>
-                  Level 10, 100 George St,
+                  Level 14, 275 Alfred Street,
                   <br />
-                  Sydney NSW 2000
+                  North Sydney NSW 2060, Australia
                 </span>
               </li>
             </ul>

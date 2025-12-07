@@ -1,13 +1,16 @@
 "use client";
 import { IconType } from "react-icons";
+
 import CandidateForm from "@/components/CandidateForm";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 import {
-  PiSealCheckBold,
+  PiUserCircleBold,
   PiShieldCheckBold,
-  PiSparkleBold,
+  PiBriefcaseBold,
+  PiRocketLaunchBold,
+  PiCheckCircleFill,
 } from "react-icons/pi";
 
 export default function RegisterPage() {
@@ -17,92 +20,89 @@ export default function RegisterPage() {
       <main className="min-h-screen bg-[var(--color-paper)] text-[var(--text-default)] font-sans">
         <div className="flex flex-col lg:flex-row min-h-screen">
           {/* --- LEFT SIDE: Form Section (Scrollable) --- */}
-          <div className="w-full lg:w-1/2 flex flex-col justify-center p-4 md:p-8 lg:p-14 xl:p-16 order-2 lg:order-1">
-            <div className="max-w-xl mx-auto w-full py-16">
+          <div className="w-full lg:w-2/3 flex flex-col justify-center p-4 md:p-8 lg:p-14 xl:p-16 order-2 lg:order-1">
+            <div className="max-w-5xl mx-auto w-full py-16">
               <div className="mb-8">
-                <h1 className="text-3xl md:text-4xl font-extrabold text-[var(--color-navy)] mb-2">
-                  Register Here
+                <h1 className="text-3xl md:text-5xl font-extrabold text-[var(--color-navy)] mb-2 mt-8 lg:mt-0 uppercase">
+                  Register Here - it&apos;s Free
                 </h1>
-                <p className="text-[var(--color-accent)] font-medium text-lg">
+                <p className="text-[var(--color-accent)] font-medium text-lg xl:text-2xl">
                   Complete your profile to connect with Australian employers.
                 </p>
               </div>
               {/* Candidate Registration Form */}
               <CandidateForm />
-              {/* Mobile-only Bottom Content (Detailed Benefits) */}
-              {/* <div className="lg:hidden mt-12">
-              <MobileTrustPanel />
-            </div> */}
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 bg-[var(--color-navy)] text-[var(--color-paper)] p-8 lg:p-12 xl:p-20 flex flex-col justify-center lg:sticky lg:top-8 xl:top-0 lg:h-screen order-1 lg:order-2 overflow-hidden relative shadow-2xl">
-            {/* Background Decorative Elements */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-brand)]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--color-accent)]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
-
-            <div className="relative z-10 space-y-10 max-w-lg mx-auto lg:mx-0 h-full flex flex-col justify-center">
-              {/* Header Section */}
-              <div className="text-center lg:text-left">
-                <div className="inline-flex items-center gap-2 bg-[var(--color-paper)]/10 px-4 py-1.5 rounded-full text-xs font-semibold text-[var(--color-brand)] border border-[var(--color-brand)]/20 mb-6 uppercase tracking-wider">
-                  Trusted Migration Partners
+          <div className="hidden w-full lg:w-5/12 xl:w-1/3 bg-[var(--color-navy)] text-[var(--color-paper)] lg:flex flex-col lg:h-screen lg:sticky lg:top-0 order-1 lg:order-2 overflow-hidden relative">
+            <div className="flex flex-col h-full justify-center p-8 lg:p-8 xl:p-12 2xl:p-16 relative z-10">
+              {/* 1. Header Section */}
+              <div className="mb-8 xl:mb-10">
+                <div className="inline-flex items-center gap-2 bg-[var(--color-brand)]/10 px-3 py-1 rounded-full text-[10px] xl:text-xs font-bold text-[var(--color-brand)] border border-[var(--color-brand)]/20 mb-4 uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
+                  Partner with MANSYS
                 </div>
-                <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
-                  Why Choose{" "}
-                  <span className="text-[var(--color-brand)]">MANSYS?</span>
+                <h2 className="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold leading-tight">
+                  Your Career, <br />
+                  <span className="text-[var(--color-brand)]">
+                    Fast-Tracked.
+                  </span>
                 </h2>
-                <p className="text-[var(--color-secondary)] text-lg leading-relaxed">
-                  A partnership you can trust. We build long-term relationships
-                  by focusing on specialisation, quality vetting, and total
-                  compliance.
-                </p>
               </div>
 
-              {/* Stats Row */}
-              <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-[var(--color-paper)]/10">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-[var(--color-paper)]">
-                    10+
-                  </div>
-                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                    Years Experience
-                  </div>
-                </div>
-                <div className="text-center border-l border-[var(--color-paper)]/10">
-                  <div className="text-3xl font-bold text-[var(--color-paper)]">
-                    500+
-                  </div>
-                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                    Clients Supported
-                  </div>
-                </div>
-                <div className="text-center border-l border-[var(--color-paper)]/10">
-                  <div className="text-3xl font-bold text-[var(--color-brand)]">
-                    99%
-                  </div>
-                  <div className="text-xs text-[var(--color-secondary)] mt-1 uppercase tracking-wide">
-                    Success Rate
-                  </div>
-                </div>
-              </div>
+              {/* 2. The Bento Grid*/}
+              <div className="grid grid-cols-2 gap-3 xl:gap-3 mb-6 xl:mb-8">
+                {/* Card 1: Create Profile */}
+                <BentoCard
+                  Icon={PiUserCircleBold}
+                  title="Create Profile"
+                  desc="Showcase your skills to top employers."
+                  delay="0"
+                />
 
-              {/* Trust Pillars (Cards) */}
-              <div className="flex gap-6">
-                <TrustCard
-                  Icon={PiSparkleBold}
-                  title="Specialists"
-                  // desc=""
-                />
-                <TrustCard
-                  Icon={PiSealCheckBold}
-                  title="Verified"
-                  // desc="We support candidates with CVs and interview coaching, ensuring employers meet people who are ready to work."
-                />
-                <TrustCard
+                {/* Card 2: Get Verified */}
+                <BentoCard
                   Icon={PiShieldCheckBold}
-                  title="Compliant"
-                  // desc="We partner with MARN-registered agents to handle all visa advice, ensuring a 100% compliant process."
+                  title="Get Verified"
+                  desc="Fast-track your application status."
+                  delay="100"
                 />
+
+                {/* Card 3: Get Matched */}
+                <BentoCard
+                  Icon={PiBriefcaseBold}
+                  title="Get Matched"
+                  desc="Direct connections to huge projects."
+                  delay="200"
+                />
+
+                {/* Card 4: Start Working*/}
+                <div className="bg-[var(--color-brand)] text-[var(--color-navy)] p-4 xl:p-5 rounded-2xl shadow-lg flex flex-col justify-between transform hover:scale-[1.02] transition-all cursor-default">
+                  <div className="flex justify-between items-start">
+                    <PiRocketLaunchBold className="text-2xl xl:text-3xl" />
+                    <PiCheckCircleFill className="text-xl opacity-50" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm xl:text-base mb-1">
+                      Start Working
+                    </h4>
+                    <p className="text-[10px] xl:text-xs font-medium opacity-80 leading-tight">
+                      Secure your role and build your future.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Footer Stats*/}
+              <div className="border-t border-[var(--color-paper)]/10 pt-4 xl:pt-6">
+                <div className="flex justify-between items-center text-center px-2">
+                  <StatItem val="99%" label="Success Rate" />
+                  <div className="w-px h-8 bg-[var(--color-paper)]/10"></div>
+                  <StatItem val="500+" label="Happy Clients" />
+                  <div className="w-px h-8 bg-[var(--color-paper)]/10"></div>
+                  <StatItem val="10yr" label="Experience" />
+                </div>
               </div>
             </div>
           </div>
@@ -113,56 +113,42 @@ export default function RegisterPage() {
   );
 }
 
-const TrustCard = ({
+const BentoCard = ({
   Icon,
   title,
-  //   desc,
+  desc,
+  delay,
 }: {
   Icon: IconType;
   title: string;
-  //   desc: string;
+  desc: string;
+  delay: string;
 }) => (
-  <div className="bg-[var(--color-paper)]/90 text-[var(--color-navy)] w-full p-2 rounded-tl-3xl rounded-br-3xl border border-[var(--color-paper)] gap-4 flex flex-col items-center justify-center shadow-2xl hover:transform hover:scale-[1.02] transition-all duration-300">
-    <div className="flex-shrink-0 w-12 h-12 bg-[var(--color-brand)]/10 rounded-full flex items-center justify-center text-2xl text-[var(--color-brand)]">
+  <div
+    className="bg-[var(--color-paper)]/5 border border-[var(--color-paper)]/10 p-4 xl:p-5 rounded-2xl hover:bg-[var(--color-paper)]/10 transition-colors duration-300 flex flex-col justify-between group h-32 xl:h-40"
+    style={{ animationDelay: `${delay}ms` }}
+  >
+    <div className="bg-[var(--color-navy)] w-8 h-8 xl:w-10 xl:h-10 rounded-full flex items-center justify-center text-[var(--color-brand)] text-lg xl:text-xl shadow-sm group-hover:scale-110 transition-transform">
       <Icon />
     </div>
     <div>
-      <h4 className="font-bold text-lg mb-1">{title}</h4>
-      {/* <p className="text-sm text-[var(--muted)] leading-relaxed">{desc}</p> */}
+      <h4 className="font-bold text-sm xl:text-base text-[var(--color-paper)] mb-1">
+        {title}
+      </h4>
+      <p className="text-[10px] xl:text-xs text-[var(--color-secondary)] leading-tight">
+        {desc}
+      </p>
     </div>
   </div>
 );
 
-const MobileTrustPanel = () => (
-  <div className="bg-[var(--color-navy)] text-[var(--color-paper)] rounded-2xl p-8 shadow-xl">
-    <h3 className="text-2xl font-bold mb-2">Why Choose Us?</h3>
-    <p className="text-[var(--color-secondary)] mb-6 text-sm">
-      Trusted by 500+ clients with a 99% success rate.
-    </p>
-
-    <div className="space-y-4">
-      <div className="flex gap-3 items-start">
-        <span className="text-xl">✨</span>
-        <div>
-          <h4 className="font-bold text-[var(--color-brand)] text-sm">
-            Specialists
-          </h4>
-          <p className="text-xs text-[var(--color-secondary)]">
-            Dedicated to trades & construction.
-          </p>
-        </div>
-      </div>
-      <div className="flex gap-3 items-start">
-        <span className="text-xl">⚖️</span>
-        <div>
-          <h4 className="font-bold text-[var(--color-brand)] text-sm">
-            Fully Compliant
-          </h4>
-          <p className="text-xs text-[var(--color-secondary)]">
-            Partnered with MARN-registered agents.
-          </p>
-        </div>
-      </div>
+const StatItem = ({ val, label }: { val: string; label: string }) => (
+  <div>
+    <div className="text-xl xl:text-2xl font-bold text-[var(--color-paper)] mb-0.5">
+      {val}
+    </div>
+    <div className="text-[10px] text-[var(--color-secondary)] uppercase tracking-wider font-semibold">
+      {label}
     </div>
   </div>
 );
