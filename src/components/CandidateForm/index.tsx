@@ -94,27 +94,27 @@ const englishLevelTooltip = (
   <div className="text-left space-y-1.5 min-w-[220px]">
     <p>
       <span className="font-bold text-[var(--color-brand)]">Bad</span> — Very
-      little English
+      limited speaking and writing
     </p>
     <p>
-      <span className="font-bold text-[var(--color-brand)]">Little</span> —
-      Basic English only
+      <span className="font-bold text-[var(--color-brand)]">Little</span> — Can
+      understand basic words; simple sentences
     </p>
     <p>
-      <span className="font-bold text-[var(--color-brand)]">OK</span> — Simple
-      conversation possible
+      <span className="font-bold text-[var(--color-brand)]">OK</span> — Can
+      communicate simple ideas; some mistakes
     </p>
     <p>
-      <span className="font-bold text-[var(--color-brand)]">Good</span> —
-      Comfortable speaking English
+      <span className="font-bold text-[var(--color-brand)]">Good</span> — Can
+      speak and write clearly in most situations.
     </p>
     <p>
       <span className="font-bold text-[var(--color-brand)]">Very Good</span> —
-      Strong English skills
+      Confident, fluent communication
     </p>
     <p>
       <span className="font-bold text-[var(--color-brand)]">Excellent</span> —
-      Fluent English
+      Very strong spoken & written English, near-professional level
     </p>
   </div>
 );
@@ -300,7 +300,7 @@ export default function CandidateForm() {
                   type="button"
                   onClick={() => field.onChange(option)}
                   className={`
-                      px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border
+                      px-4 py-2 rounded-lg text-[16px] font-medium transition-all duration-200 border
                       ${
                         isSelected
                           ? "bg-[#64a9ec] text-white border-[#64a9ec] shadow-md transform scale-[1.02]"
@@ -491,7 +491,7 @@ export default function CandidateForm() {
               {...register("consent", { required: true })}
               id="consent"
               type="checkbox"
-              className="mt-1 w-5 h-5 text-[var(--color-brand)] rounded border-gray-300 focus:ring-[var(--color-brand)]"
+              className="w-5 h-5 text-[var(--color-brand)] rounded border-gray-300 focus:ring-[var(--color-brand)]"
             />
             <label
               htmlFor="consent"
