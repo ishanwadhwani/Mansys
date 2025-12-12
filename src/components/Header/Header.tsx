@@ -5,7 +5,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import mansys_logo from "../../../public/mansys_logo.png";
+import mansys_mantra_logo from "../../../public/mansys_mantra_logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -20,17 +20,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-navy)] backdrop-blur-md border-b border-[var(--color-secondary)]/20">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-navy)] backdrop-blur-xl shadow-lg">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-3 z-50 relative">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
-              <Image src={mansys_logo} alt="MANSYS Logo" className="rounded-lg " />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-[var(--color-paper)] tracking-tight">
-                MANSYS
-              </div>
+          <Link href="/" className="">
+            <div className="w-[180px] flex items-center">
+              <Image
+                src={mansys_mantra_logo}
+                alt="MANSYS Logo"
+                className=""
+              />
             </div>
           </Link>
 
@@ -80,7 +79,7 @@ export default function Header() {
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-navy)] z-50 relative"
+            className="md:hidden p-2 rounded-full bg-[var(--color-paper)] text-[var(--color-navy)] z-50 relative"
           >
             {open ? <MdClose size={24} /> : <MdMenu size={24} />}
           </button>

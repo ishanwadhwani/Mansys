@@ -33,6 +33,9 @@ interface CandidateDoc {
   emailSentAt?: string | null;
   cv?: { _type: "reference"; _ref: string } | undefined;
   createdAt: string;
+  status: string;
+  caseStatus: string;
+  assignedTo?: { _type: "reference"; _ref: string };
 }
 
 const parseForm = async (
@@ -172,6 +175,8 @@ export async function POST(req: Request): Promise<Response> {
         email: getSingleValue(fields.email),
         createdAt: new Date().toISOString(),
         qualified: false,
+        status: "rejected",
+        caseStatus: "closed",
       };
       await writeClient.create(minimal);
       return new Response(
@@ -256,6 +261,8 @@ export async function POST(req: Request): Promise<Response> {
       emailSent: false,
       emailSentAt: null,
       createdAt: new Date().toISOString(),
+      status: "rejected",
+      caseStatus: "closed",
     };
     if (cvRef) candidate.cv = cvRef;
     const created = (await writeClient.create(candidate)) as { _id: string };

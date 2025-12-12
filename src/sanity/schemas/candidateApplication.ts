@@ -8,7 +8,59 @@ export default defineType({
   name: "candidateApplication",
   title: "Candidate Application",
   type: "document",
+  fieldsets: [
+    {
+      name: "adminControls",
+      title: "⚙️ Admin Workflow & Assignment",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
+    // Admin Workflow & Assignment
+    defineField({
+      name: "status",
+      title: "Application Status",
+      type: "string",
+      fieldset: "adminControls",
+      initialValue: "initial",
+      options: {
+        list: [
+          { title: "Initial (New)", value: "initial" },
+          { title: "In Review", value: "in_review" },
+          { title: "Contacted", value: "contacted" },
+          { title: "Interviewing", value: "interviewing" },
+          { title: "Shortlisted", value: "shortlisted" },
+          { title: "Rejected", value: "rejected" },
+          { title: "Hired / Accepted", value: "accepted" },
+        ],
+        layout: "dropdown",
+      },
+    }),
+    defineField({
+      name: "caseStatus",
+      title: "Case File Status",
+      type: "string",
+      fieldset: "adminControls",
+      initialValue: "open",
+      options: {
+        list: [
+          { title: "🟢 Open", value: "open" },
+          { title: "🔴 Closed", value: "closed" },
+          { title: "🟡 On Hold", value: "hold" },
+        ],
+        layout: "radio",
+      },
+    }),
+    defineField({
+      name: "assignedTo",
+      title: "Assigned To",
+      description: "Which staff member is handling this case?",
+      type: "reference",
+      fieldset: "adminControls",
+      to: [{ type: "staff" }],
+    }),
+
+    // Basic Info
     defineField({
       name: "wantsToWorkInAustralia",
       title: "Wants to work in Australia",
