@@ -55,9 +55,9 @@ export async function POST(req: NextRequest) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "MANSYS <onboarding@resend.dev>",
-      to: ["iwadhwani029@gmail.com"],
-      //   to: [candidate.email],
+      from: "Mansys Mantra <mantra@mansysmantra.com>",
+      // to: ["iwadhwani029@gmail.com"],
+      to: [candidate.email],
       subject: subject,
       text: body,
     });
