@@ -284,8 +284,6 @@ export async function POST(req: Request): Promise<Response> {
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
 
     if (qualified && shouldAutoSend && RESEND_API_KEY && email) {
-      // Logic to fetch email template and send via Resend... (omitted for brevity, assume success)
-      // NOTE: Ensure your Resend logic is fully robust for production use.
     }
 
     // Final API Response with Pop-up Message

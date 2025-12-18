@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { GiAustralia } from "react-icons/gi";
 
 import beach_Australia from "../../../public/beach_Australia.jpg";
 import worker2 from "../../../public/worker2.jpg";
@@ -240,6 +241,11 @@ export default function Hero() {
               <div className="grid grid-cols-2 gap-4">
                 {/* Image 1: The Worker */}
                 <div className="relative h-[280px] md:h-[350px] rounded-[2rem] overflow-hidden shadow-2xl mt-12 transform -rotate-2 hover:rotate-0 transition-transform duration-500 group">
+                  <div className="absolute inset-0 bg-[var(--color-brand)]/10 flex items-center justify-center z-10 pointer-events-none">
+                    <span className="text-white font-bold text-xl drop-shadow-md">
+                      Trades
+                    </span>
+                  </div>
                   <Image
                     src={worker2}
                     alt="Skilled Worker"
@@ -267,9 +273,12 @@ export default function Hero() {
 
               {/* Stats Badge */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-2xl shadow-xl border border-[var(--color-brand)]/20 text-center max-w-[180px] animate-float z-20">
-                <span className="text-3xl mb-1 block">🇦🇺</span>
+                <span className="text-3xl mb-1 block">
+                  <GiAustralia size={50} className="inline text-[var(--color-navy)]/90" />
+                </span>
                 <p className="text-sm font-bold text-[var(--color-navy)]">
-                  99% Visa Success Rate
+                  99% <br />
+                  <span>Visa Success Rate</span>
                 </p>
               </div>
             </div>
