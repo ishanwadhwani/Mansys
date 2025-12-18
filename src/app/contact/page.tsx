@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import {
-  FaPhoneAlt,
+  FaWhatsapp,
   FaEnvelope,
   FaMapMarkerAlt,
   FaPaperPlane,
@@ -46,21 +46,22 @@ export const ContactInfoCards = () => {
     {
       icon: <FaEnvelope />,
       label: "Email Us",
-      value: "info@mansys.com",
-      link: "mailto:info@mansys.com",
+      value: "mantra@mansysmantra.com",
+      link: "mailto:mantra@mansysmantra.com",
       color: "bg-blue-100 text-blue-600",
     },
     {
-      icon: <FaPhoneAlt />,
+      icon: <FaWhatsapp />,
       label: "Call Us",
       value: "+61 2 3456 7890",
-      link: "tel:+61234567890",
+      // link: "tel:+61234567890",
+      link: "https://wa.me/61234567890",
       color: "bg-green-100 text-green-600",
     },
     {
       icon: <FaMapMarkerAlt />,
       label: "Visit HQ",
-      value: "100 George St, Sydney",
+      value: "Level 14, 275 Alfred Street, North Sydney NSW 2060, Australia",
       link: "#",
       color: "bg-purple-100 text-purple-600",
     },
@@ -72,6 +73,8 @@ export const ContactInfoCards = () => {
         <a
           key={idx}
           href={card.link}
+          target={card.label === "WhatsApp" ? "_blank" : undefined}
+          rel={card.label === "WhatsApp" ? "noopener noreferrer" : undefined}
           className="flex items-center gap-4 p-4 rounded-xl bg-white border border-[var(--color-secondary)]/20 shadow-sm hover:shadow-md hover:border-[var(--color-brand)] transition-all duration-300 group"
         >
           <div
