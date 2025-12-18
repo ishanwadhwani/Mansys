@@ -17,8 +17,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold tracking-tight">MANSYS</h2>
-            <p className="text-[var(--color-secondary)] text-sm leading-relaxed opacity-80 max-w-xs">
+            <h2 className="text-2xl font-bold tracking-tight">MANSYS MANTRA</h2>
+            <p className="text-[var(--color-secondary)] text-sm leading-relaxed max-w-xs">
               We bridge the gap between skilled global talent and Australian
               employers. Your trusted partner for migration and career growth.
             </p>
@@ -55,14 +55,14 @@ export default function Footer() {
                   Why Australia
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/blog"
                   className="hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/candidate"
@@ -125,7 +125,7 @@ export default function Footer() {
                   href="mailto:info@mansys.com"
                   className="hover:text-white transition-colors"
                 >
-                  info@mansys.com
+                  mantra@mansysmantra.com
                 </a>
               </li>
               <li className="flex gap-3 items-start">
@@ -158,11 +158,11 @@ export default function Footer() {
 
         {/* Bottom Section: Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[var(--color-secondary)] opacity-60">
-          <p>© {currentYear} MANSYS Recruitment. All rights reserved.</p>
-          <div className="flex gap-6">
+          <p>© {currentYear} Mansys Mantra Recruitment. All rights reserved.</p>
+          {/* <div className="flex gap-6">
             <span>ABN: 12 345 678 901</span>
             <span>MARN: 1234567</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
