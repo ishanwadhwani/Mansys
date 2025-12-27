@@ -261,8 +261,8 @@ export async function POST(req: Request): Promise<Response> {
       emailSent: false,
       emailSentAt: null,
       createdAt: new Date().toISOString(),
-      status: "rejected",
-      caseStatus: "closed",
+      status: "initial",
+      caseStatus: "open",
     };
     if (cvRef) candidate.cv = cvRef;
     const created = (await writeClient.create(candidate)) as { _id: string };

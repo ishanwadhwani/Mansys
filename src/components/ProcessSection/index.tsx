@@ -51,6 +51,7 @@ export default function ProcessSection(){
             <div
               key={idx}
               className="flex flex-col items-center text-center group"
+              aria-label="How it works"
             >
               <div className="w-24 h-24 bg-white rounded-full border-4 border-[var(--color-paper)] shadow-lg flex items-center justify-center text-3xl text-[var(--color-brand)] mb-6 group-hover:scale-110 transition-transform duration-300 relative z-10">
                 {step.icon}

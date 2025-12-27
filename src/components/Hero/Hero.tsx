@@ -220,8 +220,9 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 justify-center lg:justify-start">
                 {/* Primary CTA */}
                 <Link
-                  href="/register"
+                  href="/candidate"
                   className="group relative inline-flex items-center gap-3 bg-[var(--color-navy)] text-white px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-[var(--color-accent)] hover:shadow-xl hover:-translate-y-1"
+                  aria-label="View the candidate form to start your journey"
                 >
                   Start Your Journey
                   <span className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
@@ -244,6 +245,7 @@ export default function Hero() {
                 <button
                   onClick={() => setIsHubOpen(true)}
                   className="flex items-center gap-2 px-6 py-4 rounded-full border border-[var(--color-secondary)]/30 text-[var(--color-navy)] font-medium bg-white/50 backdrop-blur-sm hover:border-[var(--color-brand)] hover:text-[var(--color-brand)] transition-colors"
+                  aria-label="Open the links hub with official government resources"
                 >
                   <span className="text-sm">View Official Guides</span>
                 </button>

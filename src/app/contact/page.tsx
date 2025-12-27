@@ -53,8 +53,7 @@ export const ContactInfoCards = () => {
     {
       icon: <FaWhatsapp />,
       label: "Call Us",
-      value: "+61 2 3456 7890",
-      // link: "tel:+61234567890",
+      value: "+61-492 819 946",
       link: "https://wa.me/61234567890",
       color: "bg-green-100 text-green-600",
     },
@@ -62,7 +61,7 @@ export const ContactInfoCards = () => {
       icon: <FaMapMarkerAlt />,
       label: "Visit HQ",
       value: "Level 14, 275 Alfred Street, North Sydney NSW 2060, Australia",
-      link: "#",
+      link: "https://maps.app.goo.gl/vecP8VFpqDgshGMW6",
       color: "bg-purple-100 text-purple-600",
     },
   ];
@@ -70,7 +69,7 @@ export const ContactInfoCards = () => {
   return (
     <div className="grid gap-4 mt-8">
       {cards.map((card, idx) => (
-        <a
+        <Link
           key={idx}
           href={card.link}
           target={card.label === "WhatsApp" ? "_blank" : undefined}
@@ -90,7 +89,7 @@ export const ContactInfoCards = () => {
               {card.value}
             </p>
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   );

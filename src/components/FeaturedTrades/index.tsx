@@ -91,7 +91,7 @@ export default function Featuredtrades() {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-8 pt-2 flex flex-col flex-grow relative z-20">
+                <div className="p-8 pt-2 flex flex-col grow relative z-20">
                   {/* Demand Tag */}
                   <div className="mb-4">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wide border border-green-500/20">
