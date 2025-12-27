@@ -133,9 +133,9 @@ export default defineType({
       title: "Where are you working currently?",
       options: {
         list: [
+          { title: "Australia", value: "Australia" },
           { title: "Bahrain", value: "Bahrain" },
           { title: "Kuwait", value: "Kuwait" },
-          { title: "Israel", value: "Israel" },
           { title: "Jordan", value: "Jordan" },
           { title: "Oman", value: "Oman" },
           { title: "Saudi Arabia", value: "Saudi Arabia" },

@@ -58,10 +58,10 @@ const experienceOptions = [
 ];
 
 const countryOfEmploymentOptions = [
+  "Australia",
   "Bahrain",
-  "Kuwait",
-  "Israel",
   "Jordan",
+  "Kuwait",
   "Oman",
   "Qatar",
   "Saudi Arabia",

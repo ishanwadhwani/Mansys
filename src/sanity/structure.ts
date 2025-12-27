@@ -32,5 +32,18 @@ export const structure: StructureResolver = (S) =>
         .title("Team Management")
         .schemaType("staff")
         .child(S.documentTypeList("staff").title("Team Management")),
+
       S.divider(),
+
+      S.listItem()
+        .title("Blog Management")
+        .child(
+          S.list()
+            .title("Blog Content")
+            .items([
+              S.documentTypeListItem("blogPosts").title("Posts"),
+              S.documentTypeListItem("blogAuthor").title("Authors"),
+              S.documentTypeListItem("blogCategory").title("Categories"),
+            ])
+        ),
     ]);

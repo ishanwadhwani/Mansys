@@ -1,10 +1,5 @@
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaLinkedinIn,
-  FaInstagram,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
@@ -26,13 +21,13 @@ export default function Footer() {
             <div className="flex gap-4 pt-2">
               {[FaLinkedinIn, FaFacebookF, FaXTwitter, FaInstagram].map(
                 (Icon, idx) => (
-                  <a
+                  <Link
                     key={idx}
                     href="#"
                     className="w-10 h-10 rounded-full bg-[var(--color-paper)]/10 flex items-center justify-center hover:bg-[var(--color-brand)] transition-colors duration-300"
                   >
                     <Icon className="w-4 h-4 text-white" />
-                  </a>
+                  </Link>
                 )
               )}
             </div>
@@ -55,14 +50,14 @@ export default function Footer() {
                   Why Australia
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link
                   href="/blog"
                   className="hover:text-white transition-colors"
                 >
                   Blog
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link
                   href="/candidate"
@@ -96,7 +91,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/privacy"
+                  href="/privacy-policy"
                   className="hover:text-white transition-colors"
                 >
                   Privacy Policy
@@ -104,7 +99,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/terms-and-conditions"
                   className="hover:text-white transition-colors"
                 >
                   Terms of Service
@@ -121,33 +116,41 @@ export default function Footer() {
                 <span className="text-[var(--color-brand)] font-bold">
                   Email:
                 </span>
-                <a
+                <Link
                   href="mailto:info@mansys.com"
                   className="hover:text-white transition-colors"
+                  aria-label="Mail Mansys Mantra on mantra@mansysmantra.com"
                 >
                   mantra@mansysmantra.com
-                </a>
+                </Link>
               </li>
               <li className="flex gap-3 items-start">
                 <span className="text-[var(--color-brand)] font-bold">
                   Phone:
                 </span>
-                <a
-                  href="tel:+61234567890"
+                <Link
+                  href="tel: +61-492 819 946"
                   className="hover:text-white transition-colors"
+                  aria-label="Call Mansys Mantra on +61 2 3456 7890"
                 >
-                  +61 2 3456 7890
-                </a>
+                  +61-492 819 946
+                </Link>
               </li>
               <li className="flex gap-3 items-start">
                 <span className="text-[var(--color-brand)] font-bold">
                   Office:
                 </span>
-                <span>
+                <Link
+                  href="https://maps.app.goo.gl/vecP8VFpqDgshGMW6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                  aria-label="Visit Mansys Mantra headquarters at Level 14, 275 Alfred Street, North Sydney NSW 2060, Australia"
+                >
                   Level 14, 275 Alfred Street,
                   <br />
                   North Sydney NSW 2060, Australia
-                </span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -158,7 +161,9 @@ export default function Footer() {
 
         {/* Bottom Section: Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[var(--color-secondary)] opacity-60">
-          <p>© {currentYear} Mansys Mantra Recruitment. All rights reserved.</p>
+          <p>
+            © {currentYear} Mansys Mantra Recruitment. All rights reserved.
+          </p>
           {/* <div className="flex gap-6">
             <span>ABN: 12 345 678 901</span>
             <span>MARN: 1234567</span>

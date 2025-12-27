@@ -3,31 +3,31 @@
 import Image from "next/image";
 import { FaQuoteLeft } from "react-icons/fa";
 import Ravi from "../../../public/Ravi.png";
-import Sarah from "../../../public/Sarah.png";
+import David from "../../../public/david.png";
 import Miguel from "../../../public/Miguel.png";
 
 export default function Testimonials() {
   const testimonials = [
     {
-      name: "Ravi Kumar",
-      role: "Welder in Sydney",
+      name: "Hamish Swan",
+      role: "Carpenter in UK",
       from: "Formerly India",
       quote:
-        "The process was transparent. I went from application to landing in Sydney in just 4 months.",
+        "The process was transparent. I went from application to landing in UK in just 4 months.",
       image: Ravi,
     },
     {
-      name: "Sarah Jenkins",
-      role: "Nurse in Melbourne",
-      from: "Formerly UK",
+      name: "David Sach",
+      role: "Plasterer in Malaysia",
+      from: "Formerly UAE",
       quote:
-        "MANSYS handled everything. The employer sponsorship was secured before I even booked my flight.",
-      image: Sarah,
+        "They handled everything. The employer sponsorship was secured before I even booked my flight.",
+      image: David,
     },
     {
-      name: "Miguel Torres",
-      role: "Tiler in Brisbane",
-      from: "Formerly Philippines",
+      name: "Wayne Wong",
+      role: "Bricklayer in Philippines",
+      from: "Formerly Jordan",
       quote:
         "Professional and honest. They told me exactly what documents I needed. Now I am earning 3x what I did back home.",
       image: Miguel,
@@ -56,7 +56,7 @@ export default function Testimonials() {
               <FaQuoteLeft className="text-4xl text-[var(--color-brand)]/10 absolute top-6 right-6" />
 
               <div className="flex md:flex-col lg:flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--color-brand)] relative">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--color-brand)] relative grayscale-90">
                   <Image
                     src={t.image}
                     alt={t.name}
@@ -81,10 +81,11 @@ export default function Testimonials() {
                 {t.quote}
               </p>
 
-              <div className="flex gap-1 mt-6 text-yellow-400 text-sm">
+              <div className="flex gap-1 mt-6 text-yellow-400 text-sm" aria-hidden="true">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <span key={i}>★</span>
                 ))}
+                <span className="sr-only">5 out of 5 stars</span>
               </div>
             </div>
           ))}

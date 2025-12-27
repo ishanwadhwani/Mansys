@@ -5,7 +5,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import mansys_mantra_logo from "../../../public/mansys_mantra_logo.png";
+import mansys_mantra_logo from "../../../public/mansys_mantra_air_logo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -23,18 +23,17 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[var(--color-navy)] backdrop-blur-xl shadow-lg">
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
-          <Link href="/" className="">
-            <div className="w-[180px] flex items-center">
-              <Image
-                src={mansys_mantra_logo}
-                alt="MANSYS Logo"
-                className=""
-              />
+          <Link href="/" aria-label="Mansys Mantra — home">
+            <div className="w-[190px] md:w-[270px] flex items-center">
+              <Image src={mansys_mantra_logo} alt="Mansys Mantra Logo" />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm">
+          <nav
+            className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm"
+            aria-label="Primary navigation"
+          >
             <Link
               href="/"
               className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
@@ -47,12 +46,12 @@ export default function Header() {
             >
               Why Australia
             </Link>
-            {/* <Link
+            <Link
               href="/blog"
-              className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
+              className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
             >
               Blog
-            </Link> */}
+            </Link>
             <Link
               href="/faqs"
               className="text-[var(--color-paper)] hover:text-[var(--color-brand)] transition-colors"
@@ -69,14 +68,16 @@ export default function Header() {
             {/* Primary CTA in Header */}
             <Link
               href="/candidate"
-              className="bg-[var(--color-paper)]/90 text-[var(--color-navy)] font-bold px-6 py-2.5 rounded-full hover:bg-[var(--color-paper)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              className="bg-white/90 text-[var(--color-navy)] font-bold px-6 py-4 rounded-full hover:bg-[var(--color-paper)] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
-              Register as Candidate
+              Register Now
             </Link>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
+            aria-controls="site-nav"
+            aria-expanded="false"
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 rounded-full bg-[var(--color-paper)] text-[var(--color-navy)] z-50 relative"
@@ -95,7 +96,7 @@ export default function Header() {
             : "opacity-0 invisible pointer-events-none"
         )}
       >
-        <nav className="flex flex-col items-center gap-8 text-xl font-medium">
+        <nav id="site-nav" className="flex flex-col items-center gap-8 text-xl font-medium">
           <Link
             href="/"
             onClick={() => setOpen(false)}
@@ -110,13 +111,13 @@ export default function Header() {
           >
             Why Australia
           </Link>
-          {/* <Link
+          <Link
             href="/blog"
             onClick={() => setOpen(false)}
             className="text-[var(--text-default)] hover:text-[var(--color-brand)] transition-colors"
           >
             Blog
-          </Link> */}
+          </Link>
           <Link
             href="/faqs"
             onClick={() => setOpen(false)}
