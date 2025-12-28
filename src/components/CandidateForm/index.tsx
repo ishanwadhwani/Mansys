@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useForm, Controller, Control, RegisterOptions } from "react-hook-form";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 type FormValues = {
   wantsToWorkInAustralia: boolean;
@@ -18,6 +19,7 @@ type FormValues = {
   passportCountryOther?: string;
   englishLevel: string;
   consent: boolean;
+  preferred_work_location_hidden?: string;
 };
 
 const countryPhoneCodes = [
@@ -128,7 +130,7 @@ export default function CandidateForm() {
     reset,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: { wantsToWorkInAustralia: true, countryCode: "+91" },
+    defaultValues: { wantsToWorkInAustralia: true, countryCode: "+61" },
   });
 
   const [serverResponse, setServerResponse] = useState<{
@@ -140,12 +142,18 @@ export default function CandidateForm() {
   } | null>(null);
 
   const [loading, setLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
 
   const watchOccupation = watch("occupation");
   const watchCountryOfEmployment = watch("countryOfEmployment");
   const watchPassportCountry = watch("passportCountry");
 
   const onSubmit = async (data: FormValues) => {
+    if (!turnstileToken) {
+      alert("Please complete the security verification.");
+      return;
+    }
+
     setLoading(true);
     setServerResponse(null);
 
@@ -183,6 +191,13 @@ export default function CandidateForm() {
     fd.append("englishLevel", data.englishLevel || "");
     fd.append("consent", String(Boolean(data.consent)));
 
+    // SECURITY FIELDS
+    fd.append("cf-turnstile-response", turnstileToken);
+    fd.append(
+      "preferred_work_location_hidden",
+      data.preferred_work_location_hidden || ""
+    );
+
     try {
       const resp = await fetch("/api/submit-candidate", {
         method: "POST",
@@ -192,6 +207,7 @@ export default function CandidateForm() {
       setServerResponse(json);
 
       if (json.ok) {
+        setTurnstileToken("");
         reset({
           wantsToWorkInAustralia: true,
           countryCode: data.countryCode,
@@ -410,6 +426,20 @@ export default function CandidateForm() {
           tooltipContent={englishLevelTooltip}
         />
 
+        {/* HONEYPOT FIELD */}
+        <div className="opacity-0 absolute top-0 left-0 h-0 w-0 z-[-1] overflow-hidden">
+          <label htmlFor="preferred_work_location_hidden">
+            Preferred Work Location
+          </label>
+          <input
+            type="text"
+            id="preferred_work_location_hidden"
+            tabIndex={-1}
+            autoComplete="off"
+            {...register("preferred_work_location_hidden")}
+          />
+        </div>
+
         <hr className="border-[var(--color-secondary)]/30 my-8" />
 
         <div className="space-y-6">
@@ -532,10 +562,21 @@ export default function CandidateForm() {
           </div>
         )}
 
+        <div className="mt-6 mb-4">
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            onSuccess={(token) => setTurnstileToken(token)}
+            options={{
+              theme: "light",
+              size: "flexible",
+            }}
+          />
+        </div>
+
         <div className="mt-10 flex justify-end">
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !turnstileToken}
             className="bg-[var(--color-navy)] hover:bg-[var(--color-accent)] text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-200 hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed w-full md:w-auto text-lg"
           >
             {loading ? "Processing..." : "Submit Application"}

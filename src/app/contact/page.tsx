@@ -62,7 +62,7 @@ export const ContactInfoCards = () => {
       label: "Visit HQ",
       value: "Level 14, 275 Alfred Street, North Sydney NSW 2060, Australia",
       link: "https://maps.app.goo.gl/vecP8VFpqDgshGMW6",
-      color: "bg-purple-100 text-purple-600",
+      color: "bg-red-100 text-red-600",
     },
   ];
 
@@ -82,12 +82,16 @@ export const ContactInfoCards = () => {
             {card.icon}
           </div>
           <div>
-            <p className="text-xs font-bold text-[var(--color-secondary)] uppercase tracking-wider">
-              {card.label}
-            </p>
-            <p className="text-lg font-semibold text-[var(--color-navy)]">
-              {card.value}
-            </p>
+            <div>
+              <p className="text-xs font-bold text-[var(--color-secondary)] uppercase tracking-wider">
+                {card.label}
+              </p>
+            </div>
+            <div className="w-64 md:w-full">
+              <p className="md:text-lg font-semibold text-[var(--color-navy)]">
+                {card.value}
+              </p>
+            </div>
           </div>
         </Link>
       ))}

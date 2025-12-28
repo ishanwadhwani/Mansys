@@ -38,6 +38,11 @@ interface CandidateDoc {
   assignedTo?: { _type: "reference"; _ref: string };
 }
 
+interface TurnstileVerifyResponse {
+  success: boolean;
+  "error-codes"?: string[];
+}
+
 const parseForm = async (
   req: Request
 ): Promise<{ fields: Fields; files: Files }> => {
@@ -162,6 +167,51 @@ async function evaluateQualification(payload: {
 export async function POST(req: Request): Promise<Response> {
   try {
     const { fields, files } = await parseForm(req);
+
+    // --- START OF SECURITY CHECKS ---
+    // Honeypot check - verification field that should be left empty
+    const honeypot = getSingleValue(fields.preferred_work_location_hidden);
+    if (honeypot) {
+      console.warn("Spam detected: Honeypot filled");
+      return new Response(
+        JSON.stringify({ ok: true, message: "Application received." }),
+        {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // Turnstile verification - verify the token with Cloudflare
+    const token = getSingleValue(fields["cf-turnstile-response"]);
+    const secretKey = process.env.TURNSTILE_SECRET_KEY;
+
+    if (!token || !secretKey) {
+      return new Response(JSON.stringify({ ok: false, error: "Bot verification failed (missing token)." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: secretKey,
+        response: token,
+      }),
+    });
+
+    // --- END SECURITY CHECKS ---
+
+    const verifyJson = (await verifyRes.json()) as TurnstileVerifyResponse;
+    if (!verifyJson.success) {
+      console.error("Turnstile verification failed:", verifyJson["error-codes"]);
+      return new Response(JSON.stringify({ ok: false, error: "Bot verification failed." }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
 
     const wantsRaw = getSingleValue(fields.wantsToWorkInAustralia);
     const wants = toBool(wantsRaw);
