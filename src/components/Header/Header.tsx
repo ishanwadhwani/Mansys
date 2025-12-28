@@ -5,7 +5,7 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import mansys_mantra_logo from "../../../public/mansys_mantra_air_logo.png";
+import mansys_mantra_logo from "../../../public/mansysmantralogo.png";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function Header() {
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" aria-label="Mansys Mantra — home">
-            <div className="w-[190px] md:w-[270px] flex items-center">
+            <div className="w-[210px] md:w-[260px] flex items-center mt-1.5">
               <Image src={mansys_mantra_logo} alt="Mansys Mantra Logo" />
             </div>
           </Link>
