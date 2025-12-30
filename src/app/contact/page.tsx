@@ -1,7 +1,7 @@
 "use client";
+
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   FaWhatsapp,
@@ -9,10 +9,10 @@ import {
   FaMapMarkerAlt,
   FaPaperPlane,
 } from "react-icons/fa";
+
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-
-import AusMap from "../../../public/AusMap.jpg";
+import PageHeader from "@/components/PageHeader";
 
 export const SydneyClock = () => {
   const [time, setTime] = useState("");
@@ -222,31 +222,13 @@ export default function contact() {
       <Header />
       <main className="min-h-screen">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-[var(--color-navy)] overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src={AusMap}
-              alt="Australian Lifestyle"
-              fill
-              className="object-cover opacity-70"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-transparent"></div>
-          </div>
-          <div className="container mx-auto px-4 relative z-10 text-center">
-            <span className="inline-block py-1 px-3 rounded-full bg-[var(--color-brand)]/20 border border-[var(--color-brand)] text-[var(--color-brand)] font-bold text-sm uppercase tracking-wider mb-6">
-              We&apos;re here to help
-            </span>
-            <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-              Contact Us <br />
-              {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-brand)] to-[var(--color-secondary)]">
-              Get in touch with the right people at Mansys.
-            </span> */}
-            </h1>
-            <p className="text-lg md:text-xl text-[var(--color-secondary)] max-w-2xl mx-auto leading-relaxed">
-              Get in touch with the right people at Mansys.
-            </p>
-          </div>
-        </section>
+        <PageHeader
+          title="Contact Us"
+          description="Get in touch with the right people at Mansys Mantra"
+          badge="We&apos;re here to help"
+          imageSrc="/assets/AusMap.jpg"
+          imageAlt="Australia's map"
+        />
         <section className="container mx-auto px-4 md:px-6 py-20 gap-12">
           <ContactInfoCards />
           <SydneyClock />

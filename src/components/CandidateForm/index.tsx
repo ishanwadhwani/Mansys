@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useForm, Controller, Control, RegisterOptions } from "react-hook-form";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { useRouter } from "next/navigation";
+import { Metadata } from "next";
 
 type FormValues = {
   wantsToWorkInAustralia: boolean;
@@ -121,7 +123,13 @@ const englishLevelTooltip = (
   </div>
 );
 
+export const metadata: Metadata = {
+  title: "Register for Australian Visa Assessment | Mansys Mantra",
+  description: "Free assessment for skilled workers looking to migrate to Australia. Check your eligibility for 482 and 186 visas today.",
+};
+
 export default function CandidateForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -204,7 +212,7 @@ export default function CandidateForm() {
         body: fd,
       });
       const json = await resp.json();
-      setServerResponse(json);
+      // setServerResponse(json);
 
       if (json.ok) {
         setTurnstileToken("");
@@ -227,6 +235,10 @@ export default function CandidateForm() {
         //   top: document.body.scrollHeight,
         //   behavior: "smooth",
         // });
+        router.push(`/thank-you?qualified=${json.qualified}`);
+        return;
+      } else {
+        setServerResponse(json);
       }
     } catch (err) {
       setServerResponse({ ok: false, message: String(err) });
@@ -499,20 +511,34 @@ export default function CandidateForm() {
               <div className="flex gap-2">
                 <select
                   {...register("countryCode")}
-                  className="w-24 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent bg-[var(--color-paper)] text-sm"
+                  className="w-20 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent bg-[var(--color-paper)] text-sm"
                 >
                   {countryPhoneCodes.map((c) => (
                     <option key={c.code} value={c.code}>
-                      {c.code}
+                      {c.code} {"\u00A0\u00A0\u00A0"}
+                      {c.country}
                     </option>
                   ))}
                 </select>
                 <input
                   {...register("phone")}
+                  maxLength={10}
                   className="w-full p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition-all bg-[var(--color-paper)]"
                   placeholder="1234567890"
+                  type="tel"
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^0-9]/g,
+                      ""
+                    );
+                  }}
                 />
               </div>
+              {errors.phone && (
+                <p className="text-xs text-red-500 mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -536,7 +562,7 @@ export default function CandidateForm() {
           )}
         </div>
 
-        {serverResponse && (
+        {/* {serverResponse && (
           <div
             className={`mt-8 p-6 rounded-xl border-l-4 shadow-sm animate-fadeIn ${
               serverResponse.qualified
@@ -560,7 +586,7 @@ export default function CandidateForm() {
               </ul>
             )}
           </div>
-        )}
+        )} */}
 
         <div className="mt-6 mb-4">
           <Turnstile

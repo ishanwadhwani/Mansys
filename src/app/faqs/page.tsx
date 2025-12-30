@@ -5,6 +5,7 @@ import { FaChevronDown, FaChevronUp, FaQuestionCircle } from "react-icons/fa";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import PageHeader from "@/components/PageHeader";
 
 const faqData = [
   {
@@ -170,28 +171,15 @@ export default function FAQPage() {
   return (
     <>
       <Header />
+      <PageHeader
+        title="Frequently Asked Questions"
+        description="Everything you need to know about migrating to Australia as a
+            skilled worker. Can't find the answer you're looking for?"
+        badge="Support Center"
+        imageSrc="/assets/faq_discussion.jpg"
+        imageAlt="Team discussing FAQs"
+      />
       <main className="min-h-screen bg-[var(--color-paper)] pt-32 pb-20">
-        {/* Hero Section */}
-        <section className="container mx-auto px-4 md:px-6 mb-16 text-center">
-          <span className="inline-block py-1 px-3 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)] font-bold text-xs uppercase tracking-wider mb-4">
-            Support Center
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--color-navy)] mb-6">
-            Frequently Asked Questions
-          </h1>
-          <p className="text-[var(--text-default)] max-w-2xl mx-auto text-lg opacity-80">
-            Everything you need to know about migrating to Australia as a
-            skilled worker. Can&apos;t find the answer you&apos;re looking for?{" "}
-            <Link
-              href="/contact"
-              className="text-[var(--color-brand)] underline font-medium"
-            >
-              Contact us
-            </Link>
-            .
-          </p>
-        </section>
-
         {/* FAQ Content */}
         <section className="container mx-auto px-4 md:px-6 max-w-3xl">
           {faqData.map((section, idx) => (

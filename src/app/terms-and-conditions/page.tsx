@@ -1,13 +1,14 @@
 "use client";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import PageHeader from "@/components/PageHeader";
 
 export default function TermsAndConditions() {
   const sections = [
     {
-      title: "1. About MansysMantra",
+      title: "1. About Mansys Mantra",
       content:
-        "MansysMantra provides information, guidance, and referral services relating to employment pathways and migration-related matters. We are not a government authority. Migration advice is provided through authorized professionals.",
+        "Mansys Mantra provides information, guidance, and referral services relating to employment pathways and migration-related matters. We are not a government authority. Migration advice is provided through authorized professionals.",
     },
     {
       title: "2. No Legal or Migration Guarantee",
@@ -32,7 +33,7 @@ export default function TermsAndConditions() {
     {
       title: "5. Intellectual Property",
       content:
-        "All content, logos, and branding are the property of MansysMantra. You may not reproduce or reuse content without prior written permission.",
+        "All content, logos, and branding are the property of Mansys Mantra. You may not reproduce or reuse content without prior written permission.",
     },
   ];
 
@@ -41,38 +42,29 @@ export default function TermsAndConditions() {
       <Header />
       <main className="min-h-screen bg-[var(--color-paper)]">
         {/* Hero Section */}
-        <section className="bg-[var(--color-navy)] pt-32 pb-20 text-center">
-          <div className="container mx-auto px-4">
-            <span className="text-[var(--color-brand)] font-bold text-sm uppercase tracking-widest mb-4 block">
-              Terms of Use
-            </span>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-              Terms & Conditions
-            </h1>
-            <p className="text-white/80 max-w-xl mx-auto text-sm">
-              Last updated: 19 December 2025 • By accessing this website, you
-              agree to be bound by these legal terms governing our services.
-            </p>
-          </div>
-        </section>
+        <PageHeader
+          title="Terms and Conditions"
+          description="By accessing this website, you agree to be bound by these legal terms governing our services."
+          badge="Legal Documentation"
+        />
 
         {/* Content Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-[var(--color-secondary)]/10">
               <div className="prose prose-slate max-w-none text-[var(--color-navy)]">
-                <p className="text-lg leading-relaxed mb-10 text-[var(--color-secondary)]">
-                  These Terms and Conditions govern your use of the Mansys Mantra
-                  website and services.
+                <p className="text-lg leading-relaxed mb-10 text-[var(--color-muted)]">
+                  These Terms and Conditions govern your use of the Mansys
+                  Mantra website and services.
                 </p>
 
                 <div className="space-y-12">
                   {sections.map((section) => (
                     <div key={section.title} className="group">
-                      <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <span className="w-1 h-6 bg-[var(--color-brand)] rounded-full group-hover:h-8 transition-all"></span>
+                      <h1 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span className="w-1 h-10 bg-[var(--color-brand)] rounded-full mt-1"></span>
                         {section.title}
-                      </h2>
+                      </h1>
                       <div className="text-[var(--color-muted)] leading-relaxed pl-4">
                         {section.content}
                       </div>

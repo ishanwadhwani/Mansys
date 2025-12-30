@@ -5,8 +5,6 @@ import { MdMenu, MdClose } from "react-icons/md";
 import clsx from "clsx";
 import Image from "next/image";
 
-import mansys_mantra_logo from "../../../public/mansysmantralogo.png";
-
 export default function Header() {
   const [open, setOpen] = useState(false);
 
@@ -24,14 +22,21 @@ export default function Header() {
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" aria-label="Mansys Mantra — home">
-            <div className="w-[210px] md:w-[260px] flex items-center mt-1.5">
-              <Image src={mansys_mantra_logo} alt="Mansys Mantra Logo" />
+            <div className="w-[210px] lg:w-[260px] flex items-center mt-1.5">
+              <Image
+                src="/assets/mansysmantralogo.png"
+                alt="Mansys Mantra Logo"
+                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 33vw, 350px"
+                width={600}
+                height={100}
+                priority
+              />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm"
+            className="hidden md:flex items-center gap-4 lg:gap-8 font-medium text-sm lg:text-base"
             aria-label="Primary navigation"
           >
             <Link
@@ -82,7 +87,7 @@ export default function Header() {
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 rounded-full bg-[var(--color-paper)] text-[var(--color-navy)] z-50 relative"
           >
-            {open ? <MdClose size={24} /> : <MdMenu size={24} />}
+            {open ? <MdClose size={24} aria-label="Close menu" /> : <MdMenu size={24} />}
           </button>
         </div>
       </header>
@@ -96,7 +101,10 @@ export default function Header() {
             : "opacity-0 invisible pointer-events-none"
         )}
       >
-        <nav id="site-nav" className="flex flex-col items-center gap-8 text-xl font-medium">
+        <nav
+          id="site-nav"
+          className="flex flex-col items-center gap-8 text-xl font-medium"
+        >
           <Link
             href="/"
             onClick={() => setOpen(false)}

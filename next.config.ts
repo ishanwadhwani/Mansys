@@ -24,12 +24,17 @@ const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value:
-      `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://cdn.sanity.io; connect-src 'self' https://*.sanity.io https://vitals.vercel-insights.com; frame-ancestors 'none';`.replace(/\s{2,}/g, ' ').trim(),
+      `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://cdn.sanity.io; connect-src 'self' https://*.sanity.io https://vitals.vercel-insights.com; frame-ancestors 'none';`
+        .replace(/\s{2,}/g, " ")
+        .trim(),
   },
 ];
 
 const nextConfig: NextConfig = {
   // 1. IMAGE OPTIMIZATION
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     remotePatterns: [
       {

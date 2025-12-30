@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import PageHeader from "@/components/PageHeader";
 
 export default function PrivacyPolicy() {
   const sections = [
@@ -52,21 +53,11 @@ export default function PrivacyPolicy() {
       <Header />
       <main className="min-h-screen bg-[var(--color-paper)]">
         {/* Hero Section */}
-        <section className="bg-[var(--color-navy)] pt-32 pb-20 text-center">
-          <div className="container mx-auto px-4">
-            <span className="text-[var(--color-brand)] font-bold text-sm uppercase tracking-widest mb-4 block">
-              Legal Documentation
-            </span>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-              Privacy Policy
-            </h1>
-            <p className="text-white/80 max-w-xl mx-auto text-sm">
-              Last updated: 19 December 2025 • Mansys Mantra is committed to
-              protecting your privacy in accordance with the Australian Privacy
-              Act 1988 (Cth).
-            </p>
-          </div>
-        </section>
+        <PageHeader
+          title="Privacy Policy"
+          description="Mansys Mantra is committed to protecting your privacy in accordance with the Australian Privacy Act 1988 (Cth)."
+          badge="Legal Documentation"
+        />
 
         {/* Content Section */}
         <section className="py-16 md:py-24">
@@ -82,10 +73,10 @@ export default function PrivacyPolicy() {
                 <div className="space-y-12">
                   {sections.map((section) => (
                     <div key={section.id} className="group">
-                      <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <span className="w-1 h-6 bg-[var(--color-brand)] rounded-full group-hover:h-8 transition-all"></span>
+                      <h1 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <span className="w-1 h-10 bg-[var(--color-brand)] rounded-full mt-1"></span>
                         {section.title}
-                      </h2>
+                      </h1>
                       <div className="text-[var(--color-muted)] leading-relaxed pl-4">
                         {section.content}
                       </div>

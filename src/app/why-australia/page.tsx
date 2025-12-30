@@ -8,48 +8,11 @@ import {
   FaMoneyBillWave,
   FaHardHat,
 } from "react-icons/fa";
+import Link from "next/link";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import operahouse from "../../../public/operahouse.jpg";
-import beach from "../../../public/beach.jpg";
-import traffic from "../../../public/traffic.jpg";
-import messy_construction from "../../../public/messy_construction.jpg";
-import gear_construction from "../../../public/gear_construction.jpg";
-import Link from "next/link";
-
-const WhyHero = () => {
-  return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-[var(--color-navy)] overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={operahouse}
-          alt="Australian Lifestyle"
-          fill
-          className="object-cover opacity-70"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy)] via-[var(--color-navy)]/80 to-transparent"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10 text-center">
-        <span className="inline-block py-1 px-3 rounded-full bg-[var(--color-brand)]/20 border border-[var(--color-brand)] text-[var(--color-brand)] font-bold text-sm uppercase tracking-wider mb-6">
-          Destination Australia
-        </span>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-          More Than Just A Job. <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-brand)] to-[var(--color-secondary)]">
-            It&apos;s A Better Life.
-          </span>
-        </h1>
-        <p className="text-lg md:text-xl text-[var(--color-secondary)] max-w-2xl mx-auto leading-relaxed">
-          Fair wages, safe workplaces, and a lifestyle that rewards your hard
-          work. Discover why skilled tradespeople are choosing Australia.
-        </p>
-      </div>
-    </section>
-  );
-};
+import PageHeader from "@/components/PageHeader";
 
 const ComparisonSection = () => {
   const comparisons = [
@@ -59,12 +22,12 @@ const ComparisonSection = () => {
       other: {
         title: "Typical Workday",
         desc: "Long shifts, late nights, often 6 days a week. Little time for family.",
-        img: traffic,
+        img: "/assets/traffic.jpg",
       },
       aus: {
         title: "The Aussie Way",
         desc: "Start early (7 AM), finish by 3 PM. Enjoy afternoons at the beach or with family.",
-        img: beach,
+        img: "/assets/beach.jpg",
       },
     },
     {
@@ -73,12 +36,12 @@ const ComparisonSection = () => {
       other: {
         title: "Common Standard",
         desc: "Inconsistent safety gear, chaotic sites, higher risk of injury.",
-        img: messy_construction,
+        img: "/assets/messy_construction.jpg",
       },
       aus: {
         title: "Safety First",
         desc: "Strict safety protocols, modern equipment, and paid sick leave entitlements.",
-        img: gear_construction,
+        img: "/assets/gear_construction.jpg",
       },
     },
   ];
@@ -88,7 +51,7 @@ const ComparisonSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-extrabold text-[var(--color-navy)]">
-            The MANSYS Difference
+            The Mansys Mantra Difference
           </h2>
           <p className="text-[var(--text-default)] mt-4">
             Compare your current working conditions with what awaits you.
@@ -307,7 +270,13 @@ export default function WhyAustraliaPage() {
     <>
       <Header />
       <main className="min-h-screen">
-        <WhyHero />
+        <PageHeader
+          title="Destination Australia"
+          description="Fair wages, safe workplaces, and a lifestyle that rewards your hardwork. Discover why skilled tradespeople are choosing Australia."
+          badge="It's A Better Life"
+          imageSrc="/assets/operahouse.jpg"
+          imageAlt="Australia's Opera House"
+        />
         <ComparisonSection />
         <SalaryGraphSection />
         <LifestyleGrid />

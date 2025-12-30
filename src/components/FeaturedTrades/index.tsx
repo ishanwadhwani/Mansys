@@ -1,9 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import welder from "../../../public/welder.jpg";
-import bricklayer from "../../../public/bricklayer.jpg";
-import carpenter from "../../../public/carpenter.png";
 import Link from "next/link";
 
 export default function Featuredtrades() {
@@ -11,21 +8,21 @@ export default function Featuredtrades() {
     {
       title: "Bricklayer",
       salary: "$90k AUD",
-      image: bricklayer,
+      image: "/assets/bricklayer.jpg",
       demand: "Very High",
       desc: "Constructing partitions, arches, and other structures.",
     },
     {
       title: "Welder",
       salary: "$85k AUD",
-      image: welder,
+      image: "/assets/welder.jpg",
       demand: "High",
       desc: "Fabricating and repairing metal parts and structures.",
     },
     {
       title: "Carpenter & Joiner",
       salary: "$82k AUD",
-      image: carpenter,
+      image: "/assets/carpenter.jpg",
       demand: "Critical",
       desc: "Constructing, installing, and repairing structures.",
     },
@@ -75,8 +72,8 @@ export default function Featuredtrades() {
                     src={trade.image}
                     alt={trade.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 100vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                    placeholder="blur"
                   />
 
                   {/* Floating Salary Badge */}

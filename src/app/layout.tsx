@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mansysmantra.com"),
@@ -51,9 +52,14 @@ export const metadata: Metadata = {
     description:
       "Specialized recruitment and skilled trade migration services in Australia. Connect with top employers and skilled workers for successful placements.",
     siteName: "Mansys Mantra",
-    // images: [
-
-    // ],
+    images: [
+      {
+        url: "https://mansysmantra.com/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mansys Mantra - Skilled Migration",
+      },
+    ],
   },
   robots: {
     index: true,
@@ -74,6 +80,21 @@ export const viewport = {
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EmploymentAgency",
+  name: "Mansys Mantra",
+  url: "https://mansysmantra.com",
+  logo: "https://mansysmantra.com/assets/mansysmantralogo.png",
+  description:
+    "Specialized recruitment and skilled trade migration services in Australia.",
+  telephone: "+61-492 819 946",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "AU",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -81,7 +102,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className="antialiased">
+        {children}
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </body>
     </html>
   );
 }
