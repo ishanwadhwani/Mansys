@@ -44,7 +44,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/about"
+                  href="/why-australia"
                   className="hover:text-white transition-colors"
                 >
                   Why Australia

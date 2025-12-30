@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import { FaQuoteLeft } from "react-icons/fa";
-import Ravi from "../../../public/Ravi.png";
-import David from "../../../public/david.png";
-import Miguel from "../../../public/Miguel.png";
 
 export default function Testimonials() {
   const testimonials = [
@@ -14,7 +11,7 @@ export default function Testimonials() {
       from: "Formerly India",
       quote:
         "The process was transparent. I went from application to landing in UK in just 4 months.",
-      image: Ravi,
+      image: "/assets/Ravi.jpg",
     },
     {
       name: "David Sach",
@@ -22,7 +19,7 @@ export default function Testimonials() {
       from: "Formerly UAE",
       quote:
         "They handled everything. The employer sponsorship was secured before I even booked my flight.",
-      image: David,
+      image: "/assets/david.jpg",
     },
     {
       name: "Wayne Wong",
@@ -30,7 +27,7 @@ export default function Testimonials() {
       from: "Formerly Jordan",
       quote:
         "Professional and honest. They told me exactly what documents I needed. Now I am earning 3x what I did back home.",
-      image: Miguel,
+      image: "/assets/Miguel.jpg",
     },
   ];
 
@@ -41,7 +38,7 @@ export default function Testimonials() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--color-navy)]">
             Success Stories
           </h2>
-          <p className="text-[var(--text-default)] mt-4 max-w-xl mx-auto opacity-80">
+          <p className="text-[var(--text-default)] mt-4 max-w-2xl mx-auto opacity-80">
             Real stories from skilled professionals who have successfully
             migrated with our help.
           </p>
@@ -61,6 +58,7 @@ export default function Testimonials() {
                     src={t.image}
                     alt={t.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 100vw"
                     className="object-cover"
                   />
                 </div>
@@ -81,7 +79,10 @@ export default function Testimonials() {
                 {t.quote}
               </p>
 
-              <div className="flex gap-1 mt-6 text-yellow-400 text-sm" aria-hidden="true">
+              <div
+                className="flex gap-1 mt-6 text-yellow-400 text-sm"
+                aria-hidden="true"
+              >
                 {[1, 2, 3, 4, 5].map((i) => (
                   <span key={i}>★</span>
                 ))}

@@ -3,8 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import PageHeader from "@/components/PageHeader";
+import { Metadata } from "next";
 
 // GROQ Query
 const query = `*[_type == "blogPosts"] | order(publishedAt desc) {
@@ -41,29 +44,25 @@ interface BlogPost {
   categories: string[];
 }
 
+export const metadata: Metadata = {
+  title: "Blogs & Articles", 
+  description: "Read blogs & articles from Mansys Mantra for skilled Australian migration assistance. We are available via email and WhatsApp.",
+};
+
 export default async function BlogListingPage() {
   const posts: BlogPost[] = await client.fetch(query);
 
   return (
     <>
       <Header />
+      <PageHeader
+        title="Our Latest Insights"
+        description="Expert advice, migration updates, and success stories from the Mansys Mantra team."
+        badge="News & Updates"
+        imageSrc="/assets/blog.jpg"
+        imageAlt="Man typing a blog article on laptop"
+      />
       <main className="min-h-screen bg-[var(--color-paper)]">
-        {/* Hero Section (Matches Privacy Policy) */}
-        <section className="bg-[var(--color-navy)] pt-32 pb-20 text-center">
-          <div className="container mx-auto px-4">
-            <span className="inline-block bg-[var(--color-brand)]/10 border border-[var(--color-brand)]/30 text-[var(--color-brand)] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-6">
-              News & Updates
-            </span>
-            <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
-              Our Latest Insights
-            </h1>
-            <p className="text-white/80 max-w-xl mx-auto text-sm">
-              Expert advice, migration updates, and success stories from the
-              Mansys Mantra team.
-            </p>
-          </div>
-        </section>
-
         {/* Blog Grid Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
