@@ -79,7 +79,7 @@ export default function LinksHub({
 
   return (
     <div
-      className="fixed inset-0 bg-[var(--color-navy)]/95 backdrop-blur-md z-[100] flex items-center justify-center p-4 transition-all duration-300 animate-fadeIn"
+      className="fixed inset-0 bg-[var(--color-navy)]/50 backdrop-blur-md z-[100] flex items-center justify-center p-4 transition-all duration-300 animate-fadeIn"
       onClick={onClose}
     >
       <div
@@ -87,12 +87,12 @@ export default function LinksHub({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 md:p-8 border-b border-[var(--color-brand)]/50 text-center relative">
-          <div className="absolute top-4 right-4 md:top-9 md:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/15 text-white">
-            <button
-              onClick={onClose}
-              aria-label="Close menu"
-              className="mb-1 md:mb-1.5 md:ml-0.5 hover:bg-[var(--color-brand)] hover:text-[var(--color-navy)] transition-all duration-300 text-2xl"
-            >
+          <div
+            onClick={onClose}
+            aria-label="Close menu"
+            className="absolute top-4 right-4 md:top-9 md:right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/15 hover:bg-[var(--color-brand)] text-white  cursor-pointer transition-all duration-300"
+          >
+            <button className="mb-1 md:mb-1.5 md:ml-0.5 hover:text-[var(--color-navy)] transition-all duration-300 text-2xl  cursor-pointer">
               &times;
             </button>
           </div>
@@ -111,7 +111,7 @@ export default function LinksHub({
             {linkCategories.map((category, catIdx) => (
               <div
                 key={catIdx}
-                className="flex flex-col bg-white/5 rounded-2xl border border-white/10 p-5 hover:border-[var(--color-brand)]/50 transition-all duration-300 group"
+                className="flex flex-col bg-white/5 rounded-2xl border border-white/30 p-5 hover:border-white/50 transition-all duration-300 group"
               >
                 <div className="flex items-center gap-1 mb-4">
                   <div className="w-12 h-12 rounded-xl text-white flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
@@ -148,7 +148,7 @@ export default function LinksHub({
               <div className="w-2 h-2 rounded-full bg-green-500"></div>
               Verified Australian Sources
             </div>
-            <p className="text-[11px] text-[var(--color-secondary)]/60 italic text-center md:text-right max-w-md">
+            <p className="text-[12px] text-[var(--color-secondary)] italic text-center md:text-right max-w-md">
               *Links direct to official .gov.au portals for immigration, workers
               rights, and fair work compliance.
             </p>

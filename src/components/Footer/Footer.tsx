@@ -1,6 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+
+import mansysmantralogo from "../../../public/assets/mansysmantralogo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,12 +11,17 @@ export default function Footer() {
   return (
     <footer className="bg-[var(--color-navy)] text-[var(--color-paper)] pt-16 pb-8 border-t border-[var(--color-secondary)]/20">
       <div className="container mx-auto px-4 md:px-6">
-        {/* Top Section: Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Column 1: Brand & About */}
-          <div className="space-y-6">
-            <h2 className="text-2xl font-bold tracking-tight">MANSYS MANTRA</h2>
-            <p className="text-[var(--color-secondary)] text-sm leading-relaxed max-w-xs">
+          <div className="flex flex-col items-center justify-center space-y-6">
+            <div className="w-54 md:w-64">
+              <Image
+                src={mansysmantralogo}
+                alt="Mansys Mantra Logo"
+                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 33vw, 350px"
+              />
+            </div>
+            <p className="text-[var(--color-secondary)] text-sm leading-relaxed max-w-xs text-center">
               We bridge the gap between skilled global talent and Australian
               employers. Your trusted partner for migration and career growth.
             </p>
@@ -113,7 +121,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-6 text-white">Get in Touch</h3>
             <ul className="space-y-4 text-sm text-[var(--color-secondary)]">
               <li className="flex gap-3 items-start">
-                <span className="text-[var(--color-brand)] font-bold">
+                <span className="text-white font-bold">
                   Email:
                 </span>
                 <Link
@@ -125,7 +133,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="flex gap-3 items-start">
-                <span className="text-[var(--color-brand)] font-bold">
+                <span className="text-white font-bold">
                   Phone:
                 </span>
                 <Link
@@ -137,7 +145,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="flex gap-3 items-start">
-                <span className="text-[var(--color-brand)] font-bold">
+                <span className="text-white font-bold">
                   Office:
                 </span>
                 <Link

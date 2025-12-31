@@ -12,8 +12,8 @@ const faqData = [
     category: "General",
     questions: [
       {
-        q: "Which professions can apply through MANSYS?",
-        a: "MANSYS supports skilled workers in trades, automotive, hospitality, care services, agriculture, and manufacturing.",
+        q: "Which professions can apply through Mansys Mantra?",
+        a: "Mansys Mantra supports skilled workers in trades, automotive, hospitality, care services, agriculture, and manufacturing.",
       },
       {
         q: "Why does Australia need overseas tradies and skilled workers?",
@@ -36,7 +36,7 @@ const faqData = [
         a: "Australia enforces strict Work Health & Safety (WHS) laws. Details: https://www.safeworkaustralia.gov.au/",
       },
       {
-        q: "Does MANSYS charge candidates?",
+        q: "Does Mansys Mantra charge candidates?",
         a: "Yes, depending on occupation and documentation needs.",
       },
       {
@@ -44,7 +44,7 @@ const faqData = [
         a: "Shortlisting: 1-3 weeks. Interviews: 1-2 weeks. Visa timelines depend on Home Affairs processing.",
       },
       {
-        q: "Can MANSYS help with interview preparation?",
+        q: "Can Mansys Mantra help with interview preparation?",
         a: "Yes. We assist with resumes, documentation, and interview coaching.",
       },
       {
