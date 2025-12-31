@@ -25,7 +25,7 @@ export default function Hero() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Text Content */}
             <div className="space-y-8 relative text-center lg:text-left">
-              <div className="absolute -top-20 -left-10 text-[var(--color-brand)] opacity-10 animate-spin-slow hidden xl:block">
+              <div className="absolute -top-15 -left-10 text-[var(--color-brand)] opacity-10 animate-spin-slow hidden xl:block">
                 <svg
                   width="140"
                   height="140"
@@ -36,7 +36,17 @@ export default function Hero() {
                 </svg>
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--color-navy)] leading-[1.1] tracking-tight">
+              {/* <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--color-navy)] leading-[1.1] tracking-tight">
+                Skilled Trades. <br />
+                <span className="text-[var(--color-brand)]">
+                  Australian
+                </span>{" "}
+                Jobs.
+              </h1> */}
+              <h1 className="z-30 text-4xl md:text-5xl lg:text-6xl font-extrabold text-[var(--color-navy)] leading-[1.1] tracking-tight">
+                <span className="block text-lg font-bold text-[var(--color-secondary)] uppercase tracking-wider mb-2 ml-2">
+                  Mansys Mantra
+                </span>
                 Skilled Trades. <br />
                 <span className="text-[var(--color-brand)]">
                   Australian
@@ -76,7 +86,7 @@ export default function Hero() {
                 {/* Secondary CTA: OPEN LINKS HUB */}
                 <button
                   onClick={() => setIsHubOpen(true)}
-                  aria-label="Open government resources hub" // Don't forget this fix!
+                  aria-label="Open government resources hub"
                   className="flex items-center gap-2 px-6 py-4 rounded-full border border-[var(--color-secondary)]/30 text-[var(--color-navy)] font-medium bg-white/50 backdrop-blur-sm hover:border-[var(--color-brand)] hover:text-[var(--color-brand)] transition-colors"
                 >
                   <span className="text-sm cursor-pointer">

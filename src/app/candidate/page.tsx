@@ -39,9 +39,9 @@ export default function RegisterPage() {
             <div className="flex flex-col h-full justify-center p-8 lg:p-8 xl:p-12 2xl:p-16 relative z-10">
               {/* 1. Header Section */}
               <div className="mb-8 xl:mb-10">
-                <div className="inline-flex items-center gap-2 bg-[var(--color-brand)]/10 px-3 py-1 rounded-full text-[10px] xl:text-xs font-bold text-[var(--color-brand)] border border-[var(--color-brand)]/20 mb-4 uppercase tracking-wider">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand)] animate-pulse"></span>
-                  Partner with MANSYS
+                <div className="inline-flex items-center gap-2 bg-[var(--color-brand)]/10 px-3 py-1 rounded-full text-[10px] xl:text-xs font-bold text-white/80 border border-white/30 mb-4 uppercase tracking-wider">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-brand)] animate-ping"></span>
+                  Partner with MANSYS MANTRA
                 </div>
                 <h2 className="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold leading-tight">
                   Your Career, <br />
@@ -78,7 +78,7 @@ export default function RegisterPage() {
                 />
 
                 {/* Card 4: Start Working*/}
-                <div className="bg-[var(--color-brand)] text-[var(--color-navy)] p-4 xl:p-5 rounded-2xl shadow-lg flex flex-col justify-between transform hover:scale-[1.02] transition-all cursor-default">
+                <div className="bg-white/90 text-[var(--color-navy)] p-4 xl:p-5 rounded-2xl shadow-lg flex flex-col justify-between transform hover:scale-[1.02] transition-all cursor-default">
                   <div className="flex justify-between items-start">
                     <PiRocketLaunchBold className="text-2xl xl:text-3xl" />
                     <PiCheckCircleFill className="text-xl opacity-50" />
@@ -128,7 +128,7 @@ const BentoCard = ({
     className="bg-[var(--color-paper)]/5 border border-[var(--color-paper)]/10 p-4 xl:p-5 rounded-2xl hover:bg-[var(--color-paper)]/10 transition-colors duration-300 flex flex-col justify-between group h-32 xl:h-40"
     style={{ animationDelay: `${delay}ms` }}
   >
-    <div className="bg-[var(--color-navy)] w-8 h-8 xl:w-10 xl:h-10 rounded-full flex items-center justify-center text-[var(--color-brand)] text-lg xl:text-xl shadow-sm group-hover:scale-110 transition-transform">
+    <div className="bg-white/80 w-8 h-8 xl:w-10 xl:h-10 rounded-full flex items-center justify-center text-[var(--color-navy)] text-lg xl:text-xl shadow-sm group-hover:scale-110 transition-transform">
       <Icon />
     </div>
     <div>

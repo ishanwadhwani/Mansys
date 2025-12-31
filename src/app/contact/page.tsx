@@ -52,7 +52,7 @@ export const ContactInfoCards = () => {
     },
     {
       icon: <FaWhatsapp />,
-      label: "Call Us",
+      label: "Call/Text Us",
       value: "+61-492 819 946",
       link: "https://wa.me/61234567890",
       color: "bg-green-100 text-green-600",
