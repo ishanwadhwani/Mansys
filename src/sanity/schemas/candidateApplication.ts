@@ -253,7 +253,6 @@ export default defineType({
       qualified: "qualified",
     },
     prepare(selection: unknown) {
-      // Safely cast the incoming generic selection
       const { firstName, email, qualified } = selection as {
         firstName?: string;
         email?: string;

@@ -12,7 +12,6 @@ interface ImageValue {
   alt?: string;
 }
 
-// Custom components using your theme variables
 const ptComponents: PortableTextComponents = {
   types: {
     image: ({ value }: { value: ImageValue }) => {
@@ -94,11 +93,8 @@ export default async function BlogPostPage({
     <>
       <Header />
       <main className="min-h-screen bg-[var(--color-paper)]">
-        {/* Hero Section (Matches Privacy Policy Design) */}
         <section className="bg-[var(--color-navy)] pt-32 pb-24 text-center relative overflow-hidden">
-          {/* Subtle Background Pattern/Image Overlay can go here if desired */}
           <div className="container mx-auto px-4 relative z-10">
-            {/* Category Pill */}
             {post.categories && post.categories.length > 0 && (
               <span className="inline-block bg-[var(--color-brand)]/10 border border-[var(--color-brand)]/30 text-[var(--color-brand)] font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-6">
                 {post.categories[0]}
@@ -124,12 +120,9 @@ export default async function BlogPostPage({
             </div>
           </div>
         </section>
-
-        {/* Content Section (White Card Style) */}
         <section className="py-16 md:py-20 -mt-10 relative z-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto bg-white rounded-[2rem] p-8 md:p-14 shadow-xl border border-[var(--color-secondary)]/10">
-              {/* Main Blog Image (Inside the card now) */}
               {post.mainImage && (
                 <div className="relative w-full h-[300px] md:h-[500px] mb-12 rounded-2xl overflow-hidden shadow-sm">
                   <Image
@@ -142,12 +135,10 @@ export default async function BlogPostPage({
                 </div>
               )}
 
-              {/* Portable Text Content */}
               <div className="prose prose-lg prose-slate max-w-none">
                 <PortableText value={post.body} components={ptComponents} />
               </div>
 
-              {/* Author Footer */}
               <div className="mt-16 pt-10 border-t border-[var(--color-secondary)]/10 flex items-center gap-4">
                 {post.author?.image && (
                   <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--color-brand)]">

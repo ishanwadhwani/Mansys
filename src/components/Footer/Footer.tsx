@@ -3,7 +3,30 @@ import Image from "next/image";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-import mansysmantralogo from "../../../public/assets/mansysmantralogo.png";
+import mansysmantralogo from "../../../public/assets/mansys_mantra.png";
+
+const socialLinks = [
+  {
+    Icon: FaLinkedinIn,
+    href: "#",
+    label: "LinkedIn",
+  },
+  {
+    Icon: FaFacebookF,
+    href: "https://www.facebook.com/profile.php?id=61584742739022",
+    label: "Facebook",
+  },
+  {
+    Icon: FaXTwitter,
+    href: "https://x.com/mansysmantra",
+    label: "X (Twitter)",
+  },
+  {
+    Icon: FaInstagram,
+    href: "https://instagram.com/mansysmantra",
+    label: "Instagram",
+  },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,17 +50,18 @@ export default function Footer() {
             </p>
             {/* Social Icons */}
             <div className="flex gap-4 pt-2">
-              {[FaLinkedinIn, FaFacebookF, FaXTwitter, FaInstagram].map(
-                (Icon, idx) => (
-                  <Link
-                    key={idx}
-                    href="#"
-                    className="w-10 h-10 rounded-full bg-[var(--color-paper)]/10 flex items-center justify-center hover:bg-[var(--color-brand)] transition-colors duration-300"
-                  >
-                    <Icon className="w-4 h-4 text-white" />
-                  </Link>
-                )
-              )}
+              {socialLinks.map(({ Icon, href, label }, idx) => (
+                <Link
+                  key={idx}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-full bg-[var(--color-paper)]/10 flex items-center justify-center hover:bg-[var(--color-brand)] transition-colors duration-300"
+                >
+                  <Icon className="w-4 h-4 text-white" />
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -121,9 +145,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold mb-6 text-white">Get in Touch</h3>
             <ul className="space-y-4 text-sm text-[var(--color-secondary)]">
               <li className="flex gap-3 items-start">
-                <span className="text-white font-bold">
-                  Email:
-                </span>
+                <span className="text-white font-bold">Email:</span>
                 <Link
                   href="mailto:info@mansys.com"
                   className="hover:text-white transition-colors"
@@ -133,9 +155,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="flex gap-3 items-start">
-                <span className="text-white font-bold">
-                  Phone:
-                </span>
+                <span className="text-white font-bold">Phone:</span>
                 <Link
                   href="tel: +61-492 819 946"
                   className="hover:text-white transition-colors"
@@ -145,9 +165,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li className="flex gap-3 items-start">
-                <span className="text-white font-bold">
-                  Office:
-                </span>
+                <span className="text-white font-bold">Office:</span>
                 <Link
                   href="https://maps.app.goo.gl/vecP8VFpqDgshGMW6"
                   target="_blank"

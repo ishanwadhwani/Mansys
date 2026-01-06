@@ -113,11 +113,11 @@ export default function Hero() {
                   </span>
                   <span className="text-[var(--color-secondary)]">•</span>
                   <span className="font-bold text-lg text-[var(--color-navy)]">
-                    Painter
+                    Painters
                   </span>
                   <span className="text-[var(--color-secondary)]">•</span>
                   <span className="font-bold text-lg text-[var(--color-navy)]">
-                    Welder
+                    Tilers  
                   </span>
                   <span className="text-[var(--color-secondary)]">•</span>
                   <span className="font-bold text-lg text-[var(--color-navy)]">
