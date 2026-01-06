@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import { PiCheckCircleFill } from "react-icons/pi";
+import { PiCheckCircleFill, PiInfoFill } from "react-icons/pi";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
@@ -12,16 +12,22 @@ function ThankYouContent() {
   const searchParams = useSearchParams();
   const isQualified = searchParams.get("qualified") === "true";
 
+  const isOther = searchParams.get("other") === "true";
+
   return (
     <>
       <Header />
       <div className="min-h-screen bg-[var(--color-paper)] flex flex-col items-center justify-center p-4 text-center">
         <div className="max-w-2xl w-full bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-[var(--color-secondary)]/20 animate-fadeIn">
           <div className="mb-6 flex justify-center">
-            {isQualified ? (
-                <div className="bg-green-100 p-4 rounded-full">
-              <PiCheckCircleFill className="text-8xl text-green-500" />
-                </div>
+            {isOther ? (
+              <div className="bg-blue-100 p-4 rounded-full">
+                <PiInfoFill className="text-8xl text-blue-500" />
+              </div>
+            ) : isQualified ? (
+              <div className="bg-green-100 p-4 rounded-full">
+                <PiCheckCircleFill className="text-8xl text-green-500" />
+              </div>
             ) : (
               <div className="bg-orange-100 p-4 rounded-full">
                 <PiCheckCircleFill className="text-8xl text-orange-500" />
@@ -30,14 +36,36 @@ function ThankYouContent() {
           </div>
 
           <h1 className="text-3xl md:text-5xl font-extrabold text-[var(--color-navy)] mb-6">
-            {isQualified ? "Congratulations!" : "Application Received"}
+            {isOther
+              ? "Application Under Review"
+              : isQualified
+                ? "Congratulations!"
+                : "Application Received"}
           </h1>
 
           <div className="flex flex-col justify-center text-lg space-y-6 mb-10 leading-relaxed">
-            {isQualified ? (
+            {/* 1. OCCUPATION IS 'OTHER' MESSAGE */}
+            {isOther ? (
+              <>
+                <p className="font-semibold text-xl text-blue-700 md:w-[500px] mx-auto">
+                  We need to manually assess your specific trade.
+                </p>
+                <p>
+                  Because your trade falls under <strong>Other</strong>, we need
+                  to review your details personally to see if there is a pathway
+                  available for you.
+                </p>
+                <p>
+                  You will receive an email from us shortly if we require more
+                  information about your specific role.
+                </p>
+              </>
+            ) : isQualified ? (
+              /* 2. STANDARD QUALIFIED MESSAGE */
               <>
                 <p className="font-semibold text-xl text-green-700 w-[300px] mx-auto">
-                  You may qualify for sponsorship in Australia. <br/> Most jobs start from AUD 80,000 per year (minimum).
+                  You may qualify for sponsorship in Australia. <br /> Most jobs
+                  start from AUD 80,000 per year (minimum).
                 </p>
                 <p>
                   Our team has received your details. We will review your
@@ -50,8 +78,11 @@ function ThankYouContent() {
                 </p>
               </>
             ) : (
+              /* 3. NOT QUALIFIED MESSAGE */
               <>
-                <p className="font-semibold">Thank you for your interest in working in Australia.</p>
+                <p className="font-semibold">
+                  Thank you for your interest in working in Australia.
+                </p>
                 <p>
                   Based on your current answers, you may not meet the strict
                   requirements for immediate sponsorship (usually due to

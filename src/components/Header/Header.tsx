@@ -22,9 +22,9 @@ export default function Header() {
         <div className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
           {/* Logo Section */}
           <Link href="/" aria-label="Mansys Mantra — home">
-            <div className="w-[210px] lg:w-[260px] flex items-center mt-1.5">
+            <div className="w-[210px] lg:w-[250px] flex items-center mt-1.5">
               <Image
-                src="/assets/mansysmantralogo.png"
+                src="/assets/mansys_mantra.png"
                 alt="Mansys Mantra Logo"
                 sizes="(max-width: 640px) 45vw, (max-width: 1024px) 33vw, 350px"
                 width={600}

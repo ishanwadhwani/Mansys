@@ -14,38 +14,26 @@ import {
 } from "@sanity/ui";
 import { useClient, useFormValue } from "sanity";
 
-// Need to define props type for custom input components
 type EmailManagerProps = {
   documentId: string;
-  value?: string; // We don't really store value here, but props require it
-  // The onChange prop is passed by Sanity form builder but we might not use it directly if we don't store value
+  value?: string;
   onChange?: (patch: Record<string, unknown>) => void;
 };
 
 export const EmailManager = () => {
-  // Access the current document values
-  // In Sanity V3 custom components, props usually include 'documentId' or we can get it from context
-  // If props.documentId is undefined, we might need to look at props.value or context, but typically for document actions it's different.
-  // For a field component, we have access to other fields via useFormValue.
-
-//   const documentId = props.documentId; // This might be available depending on where it's used (Input vs Action)
-  // If used as an Input Component, documentId might not be directly in props in all versions.
-  // A reliable way to get the ID in a field component is slightly complex, often passed down or retrieved from context.
-  // However, for this specific "Admin Action" pattern inside the form, let's rely on what's available.
-
-  // We use useFormValue to get live data from the form
   const id = useFormValue(["_id"]) as string;
   const firstName = useFormValue(["firstName"]) as string;
   const lastName = useFormValue(["lastName"]) as string;
   const email = useFormValue(["email"]) as string;
   const occupation = useFormValue(["occupation"]) as string;
+  const occupationOther = useFormValue(["occupationOther"]) as string;
 
   const safeId = id ? id.replace("drafts.", "") : "";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [actionType, setActionType] = useState<"qualify" | "reject" | null>(
-    null
-  );
+  const [actionType, setActionType] = useState<
+    "qualify" | "reject" | "review" | null
+  >(null);
   const [loading, setLoading] = useState(false);
 
   // Editable Fields
@@ -55,7 +43,7 @@ export const EmailManager = () => {
   const client = useClient({ apiVersion: "2024-01-01" });
   const toast = useToast();
 
-  const handleOpen = async (type: "qualify" | "reject") => {
+  const handleOpen = async (type: "qualify" | "reject" | "review") => {
     if (!safeId) {
       toast.push({
         status: "error",
@@ -68,9 +56,11 @@ export const EmailManager = () => {
     setActionType(type);
 
     try {
-      // 1. Fetch the template
-      const slug =
-        type === "qualify" ? "qualified-candidate" : "unqualified-candidate";
+      let slug = "";
+      if (type === "qualify") slug = "qualified-candidate";
+      else if (type === "reject") slug = "unqualified-candidate";
+      else if (type === "review") slug = "manual-review";
+
       const template = await client.fetch(
         `*[_type == "emailTemplate" && slug.current == $slug][0]`,
         { slug }
@@ -85,12 +75,12 @@ export const EmailManager = () => {
         return;
       }
 
-      // 2. Pre-fill and Replace Variables
       let processedBody = template.body || "";
       processedBody = processedBody
         .replace(/{{firstName}}/g, firstName || "")
         .replace(/{{lastName}}/g, lastName || "")
-        .replace(/{{occupation}}/g, occupation || "");
+        .replace(/{{occupation}}/g, occupation || "")
+        .replace(/{{occupationOther}}/g, occupationOther || "");
 
       setSubject(template.subject || "");
       setBody(processedBody);
@@ -108,7 +98,6 @@ export const EmailManager = () => {
     setLoading(true);
 
     try {
-      // Call your Next.js API
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -139,6 +128,21 @@ export const EmailManager = () => {
     }
   };
 
+  const getActionDetails = (): { tone: "positive" | "critical" | "primary" | "default"; label: string } => {
+    switch (actionType) {
+      case "qualify":
+        return { tone: "positive", label: "Qualification" };
+      case "reject":
+        return { tone: "critical", label: "Rejection" };
+      case "review":
+        return { tone: "primary", label: "Manual Review" };
+      default:
+        return { tone: "default", label: "Email" };
+    }
+  };
+
+  const { tone, label } = getActionDetails();
+
   return (
     <Card padding={4} radius={2} shadow={1} tone="transparent">
       <Stack space={3}>
@@ -164,13 +168,20 @@ export const EmailManager = () => {
             onClick={() => handleOpen("reject")}
             disabled={loading || !id}
           />
+          <Button
+            text="Review & Email (Other)"
+            tone="primary"
+            mode="ghost"
+            onClick={() => handleOpen("review")}
+            disabled={loading || !id}
+          />
         </Flex>
       </Stack>
 
       {/* The Modal Dialog */}
       {isOpen && (
         <Dialog
-          header={`Send ${actionType === "qualify" ? "Qualification" : "Rejection"} Email`}
+          header={`Send ${label} Email`}
           id="email-dialog"
           onClose={() => setIsOpen(false)}
           width={2}
@@ -184,7 +195,7 @@ export const EmailManager = () => {
                 />
                 <Button
                   text={loading ? "Sending..." : "Send Email"}
-                  tone={actionType === "qualify" ? "positive" : "critical"}
+                  tone={tone} 
                   onClick={handleSend}
                   disabled={loading}
                 />
@@ -195,13 +206,13 @@ export const EmailManager = () => {
           <Box padding={4}>
             <Stack space={4}>
               <Box>
-                <Label>To</Label>
+                <Label style={{ marginBottom: "0.5rem" }}>To</Label>
                 <Text size={2} style={{ marginTop: "0.5rem" }}>
                   {email} ({firstName} {lastName})
                 </Text>
               </Box>
               <Box>
-                <Label>Subject</Label>
+                <Label style={{ marginBottom: "0.5rem" }}>Subject</Label>
                 <TextInput
                   value={subject}
                   onChange={(e) => setSubject(e.currentTarget.value)}
@@ -209,7 +220,7 @@ export const EmailManager = () => {
                 />
               </Box>
               <Box>
-                <Label>Message Body</Label>
+                <Label style={{ marginBottom: "0.5rem" }}>Message Body</Label>
                 <TextArea
                   value={body}
                   onChange={(e) => setBody(e.currentTarget.value)}

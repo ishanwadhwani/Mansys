@@ -30,19 +30,21 @@ export async function POST(req: NextRequest) {
     let body = customBody;
 
     if (!subject || !body) {
-      const templateSlug =
-        type === "qualify" ? "qualified-candidate" : "unqualified-candidate";
+      let templateSlug = "unqualified-candidate";
+      if (type === "qualify") templateSlug = "qualified-candidate";
+      else if (type === "review") templateSlug = "manual-review";
 
       const template = await writeClient.fetch(
         `*[_type == "emailTemplate" && slug.current == $slug][0]`,
         { slug: templateSlug }
       );
 
-      subject =
-        template?.subject ||
-        (type === "qualify"
-          ? "Update on your Application"
-          : "Application Status");
+      let defaultSubject = "Application Status";
+      if (type === "qualify") defaultSubject = "Update on your Application";
+      if (type === "review")
+        defaultSubject = "Action Required: Information Needed";
+
+      subject = template?.subject || defaultSubject;
 
       body =
         template?.body ||
@@ -51,7 +53,8 @@ export async function POST(req: NextRequest) {
       body = body
         .replace(/{{firstName}}/g, candidate.firstName || "Candidate")
         .replace(/{{lastName}}/g, candidate.lastName || "")
-        .replace(/{{occupation}}/g, candidate.occupation || "Trade");
+        .replace(/{{occupation}}/g, candidate.occupation || "Trade")
+        .replace(/{{occupationOther}}/g, candidate.occupationOther || "Trade");
     }
 
     const { data, error } = await resend.emails.send({
@@ -78,12 +81,17 @@ export async function POST(req: NextRequest) {
       triggeredBy: "admin_action",
     });
 
+    let statusLabel = "Rejected";
+    if (type === "qualify") statusLabel = "Qualified";
+    if (type === "review") statusLabel = "Under Review";
+
     await writeClient
       .patch(candidateId)
       .set({
         emailSent: true,
         emailSentAt: new Date().toISOString(),
         qualified: type === "qualify",
+        status: statusLabel,
       })
       .commit();
 

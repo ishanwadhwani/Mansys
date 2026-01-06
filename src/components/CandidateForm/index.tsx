@@ -125,7 +125,8 @@ const englishLevelTooltip = (
 
 export const metadata: Metadata = {
   title: "Register for Australian Visa Assessment | Mansys Mantra",
-  description: "Free assessment for skilled workers looking to migrate to Australia. Check your eligibility for 482 and 186 visas today.",
+  description:
+    "Free assessment for skilled workers looking to migrate to Australia. Check your eligibility for 482 and 186 visas today.",
 };
 
 export default function CandidateForm() {
@@ -235,7 +236,8 @@ export default function CandidateForm() {
         //   top: document.body.scrollHeight,
         //   behavior: "smooth",
         // });
-        router.push(`/thank-you?qualified=${json.qualified}`);
+        const isOther = data.occupation === "Other";
+        router.push(`/thank-you?qualified=${json.qualified}&other=${isOther}`);
         return;
       } else {
         setServerResponse(json);
@@ -589,6 +591,26 @@ export default function CandidateForm() {
         )} */}
 
         <div className="mt-6 mb-4">
+          <label className="block text-sm font-bold text-[var(--color-navy)] mb-2 flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#2b4592"
+              className="w-4 h-4 text-[var(--color-navy)]"
+            >
+              <path
+                fillRule="evenodd"
+                d="M12.516 2.17a.75.75 0 00-1.032 0 11.209 11.209 0 01-7.877 3.08.75.75 0 00-.722.515A12.74 12.74 0 002.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 00.374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.352-.272-2.636-.759-3.985a.75.75 0 00-.722-.516l-.143.001c-2.996 0-5.717-1.07-7.877-3.08zM12 13.25a.75.75 0 000-1.5A.75.75 0 0012 10.5a.75.75 0 000 1.5a.75.75 0 000-1.25z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Security Verification
+          </label>
+
+          <p className="text-xs text-[var(--muted)] mb-3">
+            We use automatic verification to stop bots. If you see
+            &apos;Success&apos;, you are clear to proceed.
+          </p>
           <Turnstile
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
             onSuccess={(token) => setTurnstileToken(token)}
@@ -603,7 +625,7 @@ export default function CandidateForm() {
           <button
             type="submit"
             disabled={loading || !turnstileToken}
-            className="bg-[var(--color-navy)] hover:bg-[var(--color-accent)] text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-200 hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed w-full md:w-auto text-lg"
+            className="bg-[var(--color-navy)] hover:bg-[var(--color-accent)] cursor-pointer text-white font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-200 hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed w-full md:w-auto text-lg"
           >
             {loading ? "Processing..." : "Submit Application"}
           </button>
