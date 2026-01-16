@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
       from: "Mansys Mantra <mantra@mansysmantra.com>",
       // to: ["iwadhwani029@gmail.com"],
       to: [candidate.email],
+      bcc: ["mantra@mansysmantra.com"],
       subject: subject,
       text: body,
     });

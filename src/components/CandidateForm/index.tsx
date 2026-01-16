@@ -379,6 +379,7 @@ export default function CandidateForm() {
             </label>
             <input
               {...register("occupationOther", { required: true })}
+              maxLength={50}
               className="w-full md:w-1/2 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition-all"
               placeholder="e.g. Electrician"
             />
@@ -400,12 +401,13 @@ export default function CandidateForm() {
         />
 
         {watchCountryOfEmployment === "Other" && (
-          <div className="mb-8 animate-fadeIn">
+          <div className="mb-8">
             <label className="block text-[var(--text-default)] text-sm font-medium mb-2">
               Please specify country
             </label>
             <input
               {...register("countryOfEmploymentOther", { required: true })}
+              maxLength={50}
               className="w-full md:w-1/2 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] outline-none"
               placeholder="e.g. United Kingdom"
             />
@@ -420,12 +422,13 @@ export default function CandidateForm() {
         />
 
         {watchPassportCountry === "Other" && (
-          <div className="mb-8 animate-fadeIn">
+          <div className="mb-8">
             <label className="block text-[var(--text-default)] text-sm font-medium mb-2">
               Please specify passport country
             </label>
             <input
               {...register("passportCountryOther", { required: true })}
+              maxLength={50}
               className="w-full md:w-1/2 p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] outline-none"
               placeholder="e.g. Malaysia"
             />
@@ -468,6 +471,7 @@ export default function CandidateForm() {
               </label>
               <input
                 {...register("firstName", { required: true })}
+                maxLength={50}
                 className="w-full p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition-all bg-[var(--color-paper)]"
                 placeholder="Jane"
               />
@@ -482,6 +486,7 @@ export default function CandidateForm() {
               </label>
               <input
                 {...register("lastName")}
+                maxLength={50}
                 className="w-full p-3 rounded-lg border border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-brand)] focus:border-transparent outline-none transition-all bg-[var(--color-paper)]"
                 placeholder="Doe"
               />
