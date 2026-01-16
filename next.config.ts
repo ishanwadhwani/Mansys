@@ -31,6 +31,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  trailingSlash: true,
   // 1. IMAGE OPTIMIZATION
   compiler: {
     styledComponents: true,
