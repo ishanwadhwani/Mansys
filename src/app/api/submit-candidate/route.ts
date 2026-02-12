@@ -1,5 +1,6 @@
 export const runtime = "nodejs";
 import type { IncomingMessage } from "http";
+import { Resend } from "resend";
 
 import { Readable } from "stream";
 import formidable, { File, Files, Fields } from "formidable";
@@ -187,30 +188,45 @@ export async function POST(req: Request): Promise<Response> {
     const secretKey = process.env.TURNSTILE_SECRET_KEY;
 
     if (!token || !secretKey) {
-      return new Response(JSON.stringify({ ok: false, error: "Bot verification failed (missing token)." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({
+          ok: false,
+          error: "Bot verification failed (missing token).",
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
-    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        secret: secretKey,
-        response: token,
-      }),
-    });
+    const verifyRes = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          secret: secretKey,
+          response: token,
+        }),
+      }
+    );
 
     // --- END SECURITY CHECKS ---
 
     const verifyJson = (await verifyRes.json()) as TurnstileVerifyResponse;
     if (!verifyJson.success) {
-      console.error("Turnstile verification failed:", verifyJson["error-codes"]);
-      return new Response(JSON.stringify({ ok: false, error: "Bot verification failed." }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      console.error(
+        "Turnstile verification failed:",
+        verifyJson["error-codes"]
+      );
+      return new Response(
+        JSON.stringify({ ok: false, error: "Bot verification failed." }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
 
     const wantsRaw = getSingleValue(fields.wantsToWorkInAustralia);
@@ -316,6 +332,58 @@ export async function POST(req: Request): Promise<Response> {
     };
     if (cvRef) candidate.cv = cvRef;
     const created = (await writeClient.create(candidate)) as { _id: string };
+
+    //email notification
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+
+      const adminSubject = `New Lead: ${firstName} ${lastName} (${occupation})`;
+
+      await resend.emails.send({
+        from: "Mansys Mantra Notifications <onboarding@resend.dev>", // Change to your verified domain if ready
+        to: ["mantra@mansysmantra.com"],
+        subject: adminSubject,
+        html: `
+          <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <h2 style="color: #0b2540;">New Candidate Application</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Name:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">${firstName} ${lastName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Occupation:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">${occupation} ${occupationOther ? `(${occupationOther})` : ""}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Experience:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">${experienceYears} Years</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Location:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">${countryOfEmployment}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Contact:</strong></td>
+                <td style="padding: 8px; border-bottom: 1px solid #eee;">${email} / ${phone}</td>
+              </tr>
+            </table>
+            <p style="margin-top: 20px;">
+              <a href="https://mansysmantra.com/studio/structure/candidateApplication;${created._id}" 
+                 style="background-color: #2b4592; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">
+                 View in Studio
+              </a>
+            </p>
+          </div>
+        `,
+      });
+      console.log("Admin notification sent.");
+    } catch (emailError) {
+      console.error(
+        "Admin notification failed (Form still saved):",
+        emailError
+      );
+    }
 
     //Client Message and Send Email
     let clientMessage = "";
